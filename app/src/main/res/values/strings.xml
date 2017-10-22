@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Cookiary</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="description">Description</string>
+    <string name="name">Name</string>
+    <string name="create_recipe">Create a new recipe</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="create">create</string>
+    <string name="name_required">Name *</string>
+    <string name="quantity">Qty.</string>
+
+    <string-array name="measurement">
+        <item>tsp</item>
+        <item>tbsp</item>
+        <item>cup</item>
+        <item>oz</item>
+        <item>unit</item>
+    </string-array>
+</resources>

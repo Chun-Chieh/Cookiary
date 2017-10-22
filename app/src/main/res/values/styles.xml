@@ -1,0 +1,33 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#FFC107</item>
+        <item name="colorPrimaryDark">#FFA000</item>
+        <item name="colorAccent">#3F51B5</item>
+    </style>
+
+    <style name="myEditTextLayout">
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
+    <style name="errorTextAppearance">
+        <item name="android:textColor">#f44336</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="counterText">
+        <item name="android:textColor">#aa5353cc</item>
+    </style>
+
+    <style name="counterOverride">
+        <item name="android:textColor">#f44336</item>
+    </style>
+
+    <style name="inputFormHeader">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+</resources>
