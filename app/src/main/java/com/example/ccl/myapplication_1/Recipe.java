@@ -14,17 +14,17 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String name, String description, int imageResourceId) {
+    Recipe(String name, String description, int imageResourceId) {
         mName = name;
         mDescription = description;
         mImageResourceId = imageResourceId;
-        mAuthor = "Hank";
+        mAuthor = "Tom";
         mYield = 1;
     }
 
     /**
      *  get the name of the recipe
-     * @return
+     * @return nName
      */
     public String getName () {
         return mName;
@@ -32,7 +32,7 @@ public class Recipe {
 
     /**
      * get the author of the recipe
-     * @return
+     * @return mAuthor
      */
     public String getAuthor() {
         return mAuthor;
@@ -40,7 +40,7 @@ public class Recipe {
 
     /**
      * get the short description of the recipe
-     * @return
+     * @return mDescription
      */
     public String getDescription() {
         return mDescription;
