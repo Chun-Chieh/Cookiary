@@ -89,7 +89,7 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
      */
     public boolean isDescValid() {
         String desc = mDescriptionEditText.getText().toString();
-        if (desc.length() > 50) {
+        if (desc.length() > 30) {
             mDescriptionTextInputLayout.setErrorEnabled(true);
             mDescriptionTextInputLayout.setError("The description must be less than 50 words.");
             return false;
