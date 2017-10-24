@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/burger" />
+            tools:src="@drawable/burger"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package com.example.ccl.myapplication_1;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
     private Context mContext;
-    private ArrayList<Recipe> mRecipeList = new ArrayList<>();
+    private List<Recipe> mRecipeList = new ArrayList<>();
 
     // Provide a reference to the views for each data item
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {
+        int mId;
         CardView mCardView;
         TextView mName;
         TextView mDescription;
@@ -34,7 +37,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RecipeAdapter(ArrayList<Recipe> recipeList) {
+    public RecipeAdapter(List<Recipe> recipeList) {
         mRecipeList = recipeList;
     }
 
@@ -55,6 +58,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.mName.setText(mRecipeList.get(position).getName());
         holder.mDescription.setText(mRecipeList.get(position).getDescription());
         holder.mDishPhoto.setImageResource(mRecipeList.get(position).getImageResourceId());
+        Log.v("RecipeAdapter", mRecipeList.get(position).getName());
+        Log.v("RecipeAdapter", mRecipeList.get(position).getDescription());
+        Log.v("RecipeAdapter", String.valueOf(mRecipeList.get(position).getImageResourceId()));
 
     }
 

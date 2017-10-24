@@ -1,7 +1,9 @@
 package com.example.ccl.myapplication_1;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -21,6 +23,7 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
     private EditText mNameEditText, mDescriptionEditText;
     private Spinner mSpinner1;
     private Button mCreateButton;
+    private String name, description;
 
 
     @Override
@@ -28,20 +31,11 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_new_recipe_form);
 
-
-
-
         mNameEditText = (EditText) findViewById(R.id.name_edit_text);
         mDescriptionEditText = (EditText) findViewById(R.id.description_edit_text);
         mNameTextInputLayout = (TextInputLayout) findViewById(R.id.name_til);
         mDescriptionTextInputLayout = (TextInputLayout) findViewById(R.id.description_til);
         mSpinner1 = (Spinner) findViewById(R.id.spinner1);
-
-        // set the color for the spinner label
-        ColorStateList hintTextColor =  mNameEditText.getHintTextColors();
-        //TextView spinner1Label = (TextView) findViewById(R.id.spinner1_label);
-        //mSpinner1.setBackgroundColor(hintTextColor);
-
         mCreateButton = (Button) findViewById(R.id.create_button);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -60,6 +54,10 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         if (isNameValid() && isDescValid()) {
+            name = mNameEditText.getText().toString();
+            description = mDescriptionEditText.getText().toString();
+            DBHelper db = new DBHelper(this);
+            db.addRecipe(new Recipe(name, description, R.drawable.burger)); // insert the value to the database
             Intent i = new Intent(CreateNewRecipe.this, MainActivity.class);
             startActivity(i);
         }
@@ -68,9 +66,10 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+
     /**
      * check the name if it's valid (not null)
-     * @return
+     * @return false if the name is empty. Otherwise, return false.
      */
     public boolean isNameValid() {
         String name = mNameEditText.getText().toString();
@@ -86,7 +85,7 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
 
     /**
      * check the description if it is valid (less than 50 words)
-     * @return
+     * @return false if the string length is longer than 50. Otherwise, return true.
      */
     public boolean isDescValid() {
         String desc = mDescriptionEditText.getText().toString();

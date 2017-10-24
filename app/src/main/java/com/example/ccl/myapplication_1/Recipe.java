@@ -1,6 +1,7 @@
 package com.example.ccl.myapplication_1;
 
 public class Recipe {
+    private int mRecipe_id;
     private String mName;
     private String mAuthor;
     private String mDescription; // a short description
@@ -10,8 +11,8 @@ public class Recipe {
 
     /** Constant value that represents no image was provided for this recipe */
     private static final int NO_IMAGE_PROVIDED = -1;
+    Recipe(){
 
-    public Recipe() {
     }
 
     Recipe(String name, String description, int imageResourceId) {
@@ -23,8 +24,16 @@ public class Recipe {
     }
 
     /**
+     *  get the recipe id
+     * @return mRecipe_id
+     */
+    public int getRecipe_id() {
+        return mRecipe_id;
+    }
+
+    /**
      *  get the name of the recipe
-     * @return nName
+     * @return mName
      */
     public String getName () {
         return mName;
@@ -48,6 +57,22 @@ public class Recipe {
 
     public int getImageResourceId() {
         return mImageResourceId;
+    }
+
+    public void setRecipe_id(int recipe_id) {
+        mRecipe_id = recipe_id;
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public void setmImageResourceId(int imageResourceId){
+        mImageResourceId = imageResourceId;
     }
 
     public boolean hasImage() {

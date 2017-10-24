@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mContentRecyclerView;
@@ -33,10 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Create an ArrayList of words
-        ArrayList<Recipe> myRecipes = new ArrayList<>();
-
-        myRecipes.add(new Recipe("Burger", "Lorem ipsum dolor sit amet, consectetuer adiLorem ipsum dolor sit amet, consectetuer", R.drawable.burger));
-        myRecipes.add(new Recipe("French Fries", "They are batonnet or allumette-cut deep-fried potatoes", R.drawable.burger));
+        List<Recipe> myRecipes;
+        DBHelper db = new DBHelper(this);
+        myRecipes = db.getAllRecipes();
+//        myRecipes.add(new Recipe("Burger", "Lorem ipsum dolor sit amet, consectetuer adiLorem ipsum dolor sit amet, consectetuer", R.drawable.burger));
+//        myRecipes.add(new Recipe("French Fries", "They are batonnet or allumette-cut deep-fried potatoes", R.drawable.burger));
 
         // specify the adapter
         mAdapter = new RecipeAdapter(myRecipes);
