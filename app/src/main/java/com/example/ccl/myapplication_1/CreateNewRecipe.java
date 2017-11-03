@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,9 +22,10 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
 
     private TextInputLayout mNameTextInputLayout, mDescriptionTextInputLayout;
     private EditText mNameEditText, mDescriptionEditText;
-    private Spinner mSpinner1;
+//    private Spinner mSpinner1;
+    private AutoCompleteTextView mDishCategory;
     private Button mCreateButton;
-    private String name, description;
+    private String name, description, category;
 
 
     @Override
@@ -35,16 +37,23 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
         mDescriptionEditText = (EditText) findViewById(R.id.description_edit_text);
         mNameTextInputLayout = (TextInputLayout) findViewById(R.id.name_til);
         mDescriptionTextInputLayout = (TextInputLayout) findViewById(R.id.description_til);
-        mSpinner1 = (Spinner) findViewById(R.id.spinner1);
+        mDishCategory = (AutoCompleteTextView) findViewById(R.id.category_autocomplete);
         mCreateButton = (Button) findViewById(R.id.create_button);
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.measurement,
-                android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        mSpinner1.setAdapter(adapter);
+        String[] dish_categories = getResources().getStringArray(R.array.dish_category);
+
+        // set up the autocomplete
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dish_categories);
+        mDishCategory.setAdapter(adapter);
+
+//        mSpinner1 = (Spinner) findViewById(R.id.spinner1);
+//        // Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.measurement,
+//                android.R.layout.simple_spinner_item);
+//        // Specify the layout to use when the list of choices appears
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        // Apply the adapter to the spinner
+//        mSpinner1.setAdapter(adapter);
 
         mCreateButton.setOnClickListener(this);
         mNameEditText.setOnFocusChangeListener(new MyOnFocusChangeListener(mNameEditText));
@@ -56,8 +65,9 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
         if (isNameValid() && isDescValid()) {
             name = mNameEditText.getText().toString();
             description = mDescriptionEditText.getText().toString();
+            category = mDishCategory.getText().toString();
             DBHelper db = new DBHelper(this);
-            db.addRecipe(new Recipe(name, description, R.drawable.burger)); // insert the value to the database
+            db.addRecipe(new Recipe(name, description, category, R.drawable.burger)); // insert the value to the database
             Intent i = new Intent(CreateNewRecipe.this, MainActivity.class);
             startActivity(i);
         }
@@ -89,15 +99,17 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
      */
     public boolean isDescValid() {
         String desc = mDescriptionEditText.getText().toString();
-        if (desc.length() > 30) {
+        if (desc.length() > 500) {
             mDescriptionTextInputLayout.setErrorEnabled(true);
-            mDescriptionTextInputLayout.setError("The description must be less than 50 words.");
+            mDescriptionTextInputLayout.setError("The description must be less than 500 words.");
             return false;
         } else {
+            mDescriptionTextInputLayout.setError(null);
             mDescriptionTextInputLayout.setErrorEnabled(false);
             return true;
         }
     }
+
 
     private class MyTextWatcher implements TextWatcher {
 

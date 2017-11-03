@@ -10,7 +10,10 @@
 
     <!-- Input Form Layout-->
     <style name="myEditTextLayout">
-        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginStart">@dimen/md_edge_horizontal_margin</item>
+        <item name="android:layout_marginEnd">@dimen/md_edge_horizontal_margin</item>
+        <item name="android:paddingBottom">8dp</item>
     </style>
 
     <style name="errorTextAppearance">
@@ -41,7 +44,16 @@
         <item name="android:textSize">34sp</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="cardCategory">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">top|end</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_margin">8dp</item>
     </style>
 
     <style name="cardInfoText">

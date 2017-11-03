@@ -19,6 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String KEY_RECIPE_ID = "recipe_id";
     private static final String KEY_NAME = "recipe_name";
     private static final String KEY_DESCRIPTION = "recipe_description";
+    private static final String KEY_CATEGORY = "recipe_category";
     private static final String KEY_DISH_PHOTO = "recipe_photo";
 //    private static final String KEY_INGREDIENT_1 = "recipe_ingredient_1";
 //    private static final String KEY_INGREDIENT_2 = "recipe_ingredient_2";
@@ -28,6 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + KEY_RECIPE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_NAME + " INTEGER, "
             + KEY_DESCRIPTION + " TEXT, "
+            + KEY_CATEGORY + " TEXT, "
             + KEY_DISH_PHOTO + " INTEGER)";
 
     public DBHelper(Context context) {
@@ -57,7 +59,8 @@ public class DBHelper extends SQLiteOpenHelper {
         result.setRecipe_id(cursor.getInt(0));
         result.setName(cursor.getString(1));
         result.setDescription(cursor.getString(2));
-        result.setmImageResourceId(cursor.getInt(3));
+        result.setmCategory(cursor.getString(3));
+        result.setmImageResourceId(cursor.getInt(4));
         return result;
     }
 
@@ -68,6 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         values.put(KEY_NAME, recipe.getName());
         values.put(KEY_DESCRIPTION, recipe.getDescription());
+        values.put(KEY_CATEGORY, recipe.getCategory());
         values.put(KEY_DISH_PHOTO, recipe.getImageResourceId());
 
         // Inserting Row

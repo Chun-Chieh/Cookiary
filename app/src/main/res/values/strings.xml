@@ -4,7 +4,7 @@
     <string name="create_recipe">Create a new recipe</string>
     <string name="ingredients">Ingredients</string>
     <string name="create">create</string>
-    <string name="name_required">Name *</string>
+
     <string name="quantity">Qty.</string>
 
 
@@ -13,10 +13,24 @@
 
 
     <!-- Input form -->
+    <string name="name_required">Name*</string>
     <string name="description">Description</string>
+    <string name="category">Category</string>
+
+    <string-array name="dish_category">
+        <item>Appetizer</item>
+        <item>Beverage</item>
+        <item>Breakfast</item>
+        <item>Brunch Samoa</item>
+        <item>Dessert</item>
+        <item>Main Dish</item>
+        <item>Side Dish</item>
+        <item>Snack</item>
+    </string-array>
+
     <string-array name="measurement">
-        <item>tsp</item>
-        <item>tbsp</item>
+        <item>teaspoon</item>
+        <item>tablespoon</item>
         <item>cup</item>
         <item>oz</item>
         <item>unit</item>

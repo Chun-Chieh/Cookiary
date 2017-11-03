@@ -5,8 +5,6 @@
     android:id="@+id/create_new_recipe_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginEnd="@dimen/md_edge_horizontal_margin"
-    android:layout_marginStart="@dimen/md_edge_horizontal_margin"
     tools:context="com.example.ccl.myapplication_1.CreateNewRecipe">
 
     <android.support.design.widget.TextInputLayout
@@ -33,95 +31,55 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/description_til"
+        android:id="@+id/category_til"
         style="@style/myEditTextLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:counterEnabled="true"
-        app:counterMaxLength="30"
-        app:counterOverflowTextAppearance="@style/counterOverride"
-        app:counterTextAppearance="@style/counterText"
         app:errorEnabled="true"
         app:errorTextAppearance="@style/errorTextAppearance"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_til">
 
+        <AutoCompleteTextView
+            android:id="@+id/category_autocomplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/category"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/description_til"
+        style="@style/myEditTextLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:counterEnabled="true"
+        app:counterMaxLength="500"
+        app:counterOverflowTextAppearance="@style/counterOverride"
+        app:counterTextAppearance="@style/counterText"
+        app:errorEnabled="true"
+        app:errorTextAppearance="@style/errorTextAppearance"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category_til">
+
         <EditText
             android:id="@+id/description_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/description"
-            android:inputType="text"
-            android:lines="3"
+            android:inputType="textMultiLine"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:id="@+id/ingredient_header"
-        style="@style/inputFormHeader"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/ingredients"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_til" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/ingredient1_til"
-        style="@style/myEditTextLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/measurement1_til"
-        app:layout_constraintHorizontal_weight="5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredient_header"
-        tools:layout_editor_absoluteX="0dp">
 
-        <EditText
-            android:id="@+id/ingredient1_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:hint="Ingredient 1"
-            android:inputType="text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-    </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/measurement1_til"
-        style="@style/myEditTextLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/spinner1"
-        app:layout_constraintHorizontal_weight="2"
-        app:layout_constraintStart_toEndOf="@+id/ingredient1_til"
-        app:layout_constraintTop_toBottomOf="@+id/ingredient_header">
-
-        <EditText
-            android:id="@+id/measurement1_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/quantity"
-            android:inputType="number"
-            android:gravity="center_horizontal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.design.widget.TextInputLayout>
-
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/measurement1_til"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="3"
-        app:layout_constraintStart_toEndOf="@+id/measurement1_til" />
 
     <Button
         android:id="@+id/create_button"

@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
 //        myRecipes.add(new Recipe("Burger", "Lorem ipsum dolor sit amet, consectetuer adiLorem ipsum dolor sit amet, consectetuer", R.drawable.burger));
 //        myRecipes.add(new Recipe("French Fries", "They are batonnet or allumette-cut deep-fried potatoes", R.drawable.burger));
 
-        // specify the adapter
-        mAdapter = new RecipeAdapter(myRecipes);
+
+        mAdapter = new RecipeAdapter(myRecipes); // specify the adapter
         mContentRecyclerView.setAdapter(mAdapter);
 
 
