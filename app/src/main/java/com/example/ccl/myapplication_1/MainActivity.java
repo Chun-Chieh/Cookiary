@@ -17,6 +17,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    /**
+     * initialize the layout (RecyclerView) and setup the adapter (RecipeAdapter)
+     * read the database (Recipiary.db)
+     * set up the intents (DetailActivity and CreateNewRecipe) for image and FAB
+     * @param savedInstanceState inherited from AppCompatActivity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,17 +43,22 @@ public class MainActivity extends AppCompatActivity {
         List<Recipe> myRecipes;
         DBHelper db = new DBHelper(this);
         myRecipes = db.getAllRecipes();
-//        myRecipes.add(new Recipe("Burger", "Lorem ipsum dolor sit amet, consectetuer adiLorem ipsum dolor sit amet, consectetuer", R.drawable.burger));
-//        myRecipes.add(new Recipe("French Fries", "They are batonnet or allumette-cut deep-fried potatoes", R.drawable.burger));
 
-
-        mAdapter = new RecipeAdapter(myRecipes); // specify the adapter
+        // specify the adapter
+        mAdapter = new RecipeAdapter(myRecipes);
         mContentRecyclerView.setAdapter(mAdapter);
 
+        // prompt the message of creating a new recipe or reading the db successfully
+        if (getIntent().hasExtra("New Recipe Prompt")) {
+            String promptMsg = getIntent().getStringExtra("New Recipe Prompt");
+            showMsg(promptMsg);
+        } else {
+            showMsg("Initiate successfully!");
+        }
 
-
-        FloatingActionButton fab =  (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener(){
+        // set up the onClickListener for the fab
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.create_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //showMsg("Click!!");
@@ -58,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * show a snackbar with custom text messages
+     * @param message the text to show
+     */
     private void showMsg(String message) {
         Snackbar.make(findViewById(R.id.coordinator_layout_view), message, Snackbar.LENGTH_SHORT).show();
     }

@@ -35,4 +35,7 @@
         <item>oz</item>
         <item>unit</item>
     </string-array>
+
+    <!-- Recipe Detail -->
+    <string name="title_activity_detail">DetailActivity</string>
 </resources>

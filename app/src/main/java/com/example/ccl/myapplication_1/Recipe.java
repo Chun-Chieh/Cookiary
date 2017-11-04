@@ -1,5 +1,7 @@
 package com.example.ccl.myapplication_1;
 
+import java.util.Objects;
+
 public class Recipe {
     private int mRecipe_id;
     private String mName;
@@ -19,19 +21,18 @@ public class Recipe {
     Recipe(String name, String description, int imageResourceId) {
         mName = name;
         mDescription = description;
-        mCategory = "Uncategorized";
         mImageResourceId = imageResourceId;
-        mAuthor = "Tom";
-        mYield = 1;
     }
 
     Recipe(String name, String description, String category, int imageResourceId) {
         mName = name;
         mDescription = description;
-        mCategory = category;
+        if (category.equals("")) {
+            mCategory = "Uncategorized";
+        } else {
+            mCategory = category;
+        }
         mImageResourceId = imageResourceId;
-        mAuthor = "Tom";
-        mYield = 1;
     }
 
     /**
@@ -96,5 +97,19 @@ public class Recipe {
 
     public boolean hasImage() {
         return mImageResourceId != NO_IMAGE_PROVIDED;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "mRecipe_id=" + mRecipe_id +
+                ", mName='" + mName + '\'' +
+                ", mAuthor='" + mAuthor + '\'' +
+                ", mDescription='" + mDescription + '\'' +
+                ", mCategory='" + mCategory + '\'' +
+                ", mImageResourceId=" + mImageResourceId +
+                ", mYield=" + mYield +
+                ", mCreatedDate='" + mCreatedDate + '\'' +
+                '}';
     }
 }

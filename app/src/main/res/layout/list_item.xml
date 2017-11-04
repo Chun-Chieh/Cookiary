@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/md_edge_horizontal_margin"
     android:layout_marginStart="@dimen/md_edge_horizontal_margin"
-    android:layout_marginTop="@dimen/md_space_between_content_area"
-    android:layout_marginBottom="@dimen/md_space_between_content_area">
+    android:layout_marginTop="@dimen/md_space_between_content_area">
 
     <LinearLayout
         android:layout_width="match_parent"

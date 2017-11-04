@@ -5,6 +5,7 @@
     android:id="@+id/create_new_recipe_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundLightTheme"
     tools:context="com.example.ccl.myapplication_1.CreateNewRecipe">
 
     <android.support.design.widget.TextInputLayout

@@ -1,6 +1,7 @@
 package com.example.ccl.myapplication_1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,13 +22,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     private List<Recipe> mRecipeList = new ArrayList<>();
     boolean hasDescShown = false;
 
-    public RecipeAdapter(Context c){
-        mContext = c;
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public RecipeAdapter(List<Recipe> recipeList) {
+        mRecipeList = recipeList;
     }
 
     // Provide a reference to the views for each data item
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {
         int mId;
+        Context mContext;
         CardView mCardView;
         TextView mName;
         TextView mDescription;
@@ -36,17 +39,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         RecipeViewHolder(View itemView) {
             super(itemView);
+            mContext = itemView.getContext();
             mCardView = itemView.findViewById(R.id.recipe_card_view);
             mName = itemView.findViewById(R.id.name_text_view);
             mDescription = itemView.findViewById(R.id.description_text_view);
             mCategory = itemView.findViewById(R.id.dish_category_text_view);
             mDishPhoto = itemView.findViewById(R.id.thumb_nail);
         }
-    }
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public RecipeAdapter(List<Recipe> recipeList) {
-        mRecipeList = recipeList;
     }
 
     // Create new views (invoked by the layout manager)
@@ -74,10 +73,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.mDishPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("RecipeAdapter", "item: " + position + "\nName: " +
-                        mRecipeList.get(position).getName() + "\nRecipe id: " +
-                        mRecipeList.get(position).getRecipe_id()
-                );
+                Log.v("RecipeAdapter", "item: " + position + mRecipeList.get(position));
+                // Intent to DetailActivity
+                Intent recipeDetail = new Intent(holder.mContext, DetailActivity.class);
+                // pass the name to Recipe Detail
+                recipeDetail.putExtra("Recipe Name", holder.mName.getText().toString());
+                holder.mContext.startActivity(recipeDetail);
             }
         });
 

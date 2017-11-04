@@ -69,6 +69,7 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
             DBHelper db = new DBHelper(this);
             db.addRecipe(new Recipe(name, description, category, R.drawable.burger)); // insert the value to the database
             Intent i = new Intent(CreateNewRecipe.this, MainActivity.class);
+            i.putExtra("New Recipe Prompt", name +" has created successfully!");
             startActivity(i);
         }
         else{
@@ -136,9 +137,6 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
                 case R.id.description_edit_text:
                     isDescValid();
                     break;
-//                case R.id.et_email:
-//                    isEmailValid();
-//                    break;
             }
         }
     }
