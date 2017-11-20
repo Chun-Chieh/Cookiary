@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
-        applicationId "com.example.ccl.myapplication_1"
+        applicationId "com.example.ccl.Cookiary"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1

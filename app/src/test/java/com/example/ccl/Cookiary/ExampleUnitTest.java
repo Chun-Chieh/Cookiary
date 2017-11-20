@@ -1,4 +1,4 @@
-package com.example.ccl.myapplication_1;
+package com.example.ccl.Cookiary;
 
 import org.junit.Test;
 

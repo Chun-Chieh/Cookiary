@@ -1,30 +1,29 @@
-package com.example.ccl.myapplication_1;
-
-import java.util.Objects;
+package com.example.ccl.Cookiary.Model;
 
 public class Recipe {
     private int mRecipe_id;
-    private String mName;
-    private String mAuthor;
+    private String mName, mAuthor;
     private String mDescription, mCategory; // a short description
     private int mImageResourceId = NO_IMAGE_PROVIDED;
     private int mYield; // number of servings
+    private String mCookingTime;
+    private String mDifficulty;
     private String mCreatedDate;
 
     /** Constant value that represents no image was provided for this recipe */
     private static final int NO_IMAGE_PROVIDED = -1;
 
-    Recipe(){
+    public Recipe(){
 
     }
 
-    Recipe(String name, String description, int imageResourceId) {
+    public Recipe(String name, String description, int imageResourceId) {
         mName = name;
         mDescription = description;
         mImageResourceId = imageResourceId;
     }
 
-    Recipe(String name, String description, String category, int imageResourceId) {
+    public Recipe(String name, String description, String category, int imageResourceId) {
         mName = name;
         mDescription = description;
         if (category.equals("")) {
@@ -67,14 +66,45 @@ public class Recipe {
         return mDescription;
     }
 
+
+    /**
+     * get the category of the recipe
+     * @return mCategory
+     */
     public String getCategory () {
         return  mCategory;
     }
 
+    /**
+     * get the image of the recipe
+     * @return imageId
+     */
     public int getImageResourceId() {
         return mImageResourceId;
     }
 
+    /**
+     * get the cooking time of the recipe
+     * @return mTime
+     */
+    public String getCookingTime() { return mCookingTime; }
+
+    /**
+     * get the servings of the recipe
+     * @return mYield
+     */
+    public int getYield() { return mYield;}
+
+    /**
+     * get the difficulty of the recipe
+     * @return mDifficulty
+     */
+    public String getDifficulty() {return mDifficulty; }
+
+    /**
+     * set the id of the recipe
+     * @param recipe_id id
+     */
     public void setRecipe_id(int recipe_id) {
         mRecipe_id = recipe_id;
     }
@@ -95,6 +125,14 @@ public class Recipe {
         mImageResourceId = imageResourceId;
     }
 
+    public void setCookingTime (String cookingTime) {mCookingTime = cookingTime; }
+
+    public void setYield (int yield) { mYield = yield; }
+
+    public void setDifficulty (String difficulty) { mDifficulty = difficulty;}
+
+
+
     public boolean hasImage() {
         return mImageResourceId != NO_IMAGE_PROVIDED;
     }
@@ -108,7 +146,9 @@ public class Recipe {
                 ", mDescription='" + mDescription + '\'' +
                 ", mCategory='" + mCategory + '\'' +
                 ", mImageResourceId=" + mImageResourceId +
+                ", mCookingTime=" + mCookingTime +
                 ", mYield=" + mYield +
+                ", mDifficulty=" + mDifficulty +
                 ", mCreatedDate='" + mCreatedDate + '\'' +
                 '}';
     }

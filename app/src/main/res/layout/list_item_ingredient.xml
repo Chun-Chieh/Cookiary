@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ingredient_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginEnd="@dimen/md_edge_horizontal_margin"
+    android:layout_marginStart="@dimen/md_edge_horizontal_margin"
+    android:layout_marginBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ingredient_name_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/md_space_between_content_area"
+            android:layout_weight="5"
+            android:gravity="center_vertical"
+            tools:text="honey" />
+
+        <TextView
+            android:id="@+id/ingredient_quantity_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/md_space_between_content_area"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            tools:text="2" />
+        <TextView
+            android:id="@+id/ingredient_measurement_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/md_space_between_content_area"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textStyle="bold"
+            tools:text="Tablespoons" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Array for the autocompletion of dish_categories (CreateNewRecipe) -->
+    <string-array name="dish_category">
+        <item>Appetizer</item>
+        <item>Beverage</item>
+        <item>Breakfast</item>
+        <item>Brunch Samoa</item>
+        <item>Dessert</item>
+        <item>Main Dish</item>
+        <item>Side Dish</item>
+        <item>Snack</item>
+    </string-array>
+
+    <string-array name="measurement">
+        <item>Teaspoon</item>
+        <item>Tablespoon</item>
+        <item>Cup</item>
+        <item>Oz</item>
+        <item>Unit</item>
+    </string-array>
+
+</resources>

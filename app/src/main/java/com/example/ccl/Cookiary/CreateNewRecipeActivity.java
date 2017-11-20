@@ -1,80 +1,88 @@
-package com.example.ccl.myapplication_1;
+package com.example.ccl.Cookiary;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 
+import com.example.ccl.Cookiary.Model.Recipe;
+import com.example.ccl.Cookiary.data.CookiaryDbHelper;
 
-public class CreateNewRecipe extends AppCompatActivity implements View.OnClickListener {
+/**
+ * @author Chun-Chieh Liang
+ * Last update: Nov, 7, 2017
+ */
 
+public class CreateNewRecipeActivity extends AppCompatActivity {
     private TextInputLayout mNameTextInputLayout, mDescriptionTextInputLayout;
     private EditText mNameEditText, mDescriptionEditText;
-//    private Spinner mSpinner1;
     private AutoCompleteTextView mDishCategory;
     private Button mCreateButton;
     private String name, description, category;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_new_recipe_form);
+        setContentView(R.layout.activity_create_new_recipe);
 
         mNameEditText = (EditText) findViewById(R.id.name_edit_text);
         mDescriptionEditText = (EditText) findViewById(R.id.description_edit_text);
         mNameTextInputLayout = (TextInputLayout) findViewById(R.id.name_til);
         mDescriptionTextInputLayout = (TextInputLayout) findViewById(R.id.description_til);
         mDishCategory = (AutoCompleteTextView) findViewById(R.id.category_autocomplete);
-        mCreateButton = (Button) findViewById(R.id.create_button);
 
         String[] dish_categories = getResources().getStringArray(R.array.dish_category);
 
         // set up the autocomplete
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dish_categories);
+
         mDishCategory.setAdapter(adapter);
-
-//        mSpinner1 = (Spinner) findViewById(R.id.spinner1);
-//        // Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.measurement,
-//                android.R.layout.simple_spinner_item);
-//        // Specify the layout to use when the list of choices appears
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        // Apply the adapter to the spinner
-//        mSpinner1.setAdapter(adapter);
-
-        mCreateButton.setOnClickListener(this);
         mNameEditText.setOnFocusChangeListener(new MyOnFocusChangeListener(mNameEditText));
         mDescriptionEditText.setOnFocusChangeListener(new MyOnFocusChangeListener(mDescriptionEditText));
     }
 
+
     @Override
-    public void onClick(View view) {
-        if (isNameValid() && isDescValid()) {
-            name = mNameEditText.getText().toString();
-            description = mDescriptionEditText.getText().toString();
-            category = mDishCategory.getText().toString();
-            DBHelper db = new DBHelper(this);
-            db.addRecipe(new Recipe(name, description, category, R.drawable.burger)); // insert the value to the database
-            Intent i = new Intent(CreateNewRecipe.this, MainActivity.class);
-            i.putExtra("New Recipe Prompt", name +" has created successfully!");
-            startActivity(i);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_new_recipe, menu);
+        return true;
+    }
+
+    /**
+     * do actions whether the name and description is valid or not
+     * @param item menu item
+     * @return true if the item is clicked
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_create:
+                if (isNameValid() && isDescValid()) {
+                    // insert the recipe to the database and go to MainActivity with a prompt message
+                    name = mNameEditText.getText().toString();
+                    description = mDescriptionEditText.getText().toString();
+                    category = mDishCategory.getText().toString();
+                    insertRecipe();
+                    Intent i = new Intent(CreateNewRecipeActivity.this, MainActivity.class);
+                    i.putExtra("New Recipe Prompt", name +" has created successfully!");
+                    startActivity(i);
+                }
+                else{
+                    Snackbar.make(findViewById(R.id.create_new_recipe_form), "Check the error messages!", Snackbar.LENGTH_SHORT).show();
+                }
+                return true;
         }
-        else{
-            Snackbar.make(findViewById(R.id.create_new_recipe_form), "Check the error messages!", Snackbar.LENGTH_SHORT).show();
-        }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -111,7 +119,19 @@ public class CreateNewRecipe extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * call the addRecipe() as a instance of CookiaryDbHelper
+     */
+    private void insertRecipe() {
+        CookiaryDbHelper db = new CookiaryDbHelper(this);
+        db.addRecipe(new Recipe(name, description, category, R.raw.burger));
+        db.close();
+    }
 
+
+    /**
+     * check the textView real-time if it's changed
+     */
     private class MyTextWatcher implements TextWatcher {
 
         private View view;

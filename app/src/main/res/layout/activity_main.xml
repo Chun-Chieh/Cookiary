@@ -5,14 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundLightTheme"
-    tools:context="com.example.ccl.myapplication_1.MainActivity">
+    android:scrollbars="vertical"
+    tools:context="com.example.ccl.Cookiary.MainActivity">
+
+    <TextView
+        android:id="@+id/no_data_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        android:text="@string/no_data_history"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical">
+        android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
+
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/create_fab"
@@ -20,5 +31,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_create_white_24dp" />
+        android:src="@drawable/ic_add_white_36dp" />
 </android.support.design.widget.CoordinatorLayout>

@@ -1,4 +1,4 @@
-package com.example.ccl.myapplication_1;
+package com.example.ccl.Cookiary;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.ccl.myapplication_1", appContext.getPackageName());
+        assertEquals("com.example.ccl.Cookiary", appContext.getPackageName());
     }
 }

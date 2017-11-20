@@ -1,41 +1,69 @@
 <resources>
+    <!-- Name for the application (AndroidManifest)-->
     <string name="app_name">Cookiary</string>
-    <string name="placeholder">Placeholder</string>
-    <string name="create_recipe">Create a new recipe</string>
-    <string name="ingredients">Ingredients</string>
+
+    <!-- Description for the thumbnail of a dish (list_item)-->
+    <string name="list_item_img_content_desc">The thumbnail of the dish</string>
+
+    <!-- Title for the activity to show a recipe detail (DetailActivity) -->
+    <string name="detail_activity_title_recipe_detail">Recipe Detail</string>
+
+    <!-- Title for the activity to update a recipe (UpdateDetailActivity) -->
+    <string name="update_activity_title">Edit the recipe</string>
+
+    <!-- Title for the activity to create a new recipe (CreateNewRecipe)-->
+    <string name="create_new_recipe_activity_title">Add a recipe</string>
+
+    <!-- Prompt message for no data (MainActivity) -->
+    <string name="no_data_history">Time to add a recipe!</string>
+
+    <!-- Label for overflow menu option that edit the recipe detail -->
+    <string name="action_edit_detail">Edit</string>
+
+    <!-- Label for overflow menu option that insert dummy data to the database -->
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+
+    <!-- Label for overflow menu option that edit ingredient in the recipeDetail -->
+    <string name="action_edit_ingredient">Edit ingredient</string>
+
+    <!-- Label for overflow menu option that save the input data -->
+    <string name="action_save">Save</string>
+
+    <!-- Label for overview category of attributes -->
+    <string name="category_overview">Overview</string>
+
+    <!-- Label for information of ingredients -->
+    <string name="category_ingredients">Ingredients</string>
+
+    <!-- Label for information of directions -->
+    <string name="category_directions">Directions</string>
+
+    <!-- Text for the button to create a new recipe -->
     <string name="create">create</string>
 
-    <string name="quantity">Qty.</string>
-
-
-    <!-- Card -->
-    <string name="card_img_content_desc">The thumbnail of the dish</string>
-
-
-    <!-- Input form -->
+    <!-- Text hint for name field  -->
     <string name="name_required">Name*</string>
+
+    <!-- Text hint for description field  -->
     <string name="description">Description</string>
+
+    <!-- Text hint for category field  -->
     <string name="category">Category</string>
 
-    <string-array name="dish_category">
-        <item>Appetizer</item>
-        <item>Beverage</item>
-        <item>Breakfast</item>
-        <item>Brunch Samoa</item>
-        <item>Dessert</item>
-        <item>Main Dish</item>
-        <item>Side Dish</item>
-        <item>Snack</item>
-    </string-array>
+    <!-- Text hint for time field  -->
+    <string name="time">Total Time</string>
 
-    <string-array name="measurement">
-        <item>teaspoon</item>
-        <item>tablespoon</item>
-        <item>cup</item>
-        <item>oz</item>
-        <item>unit</item>
-    </string-array>
+    <!-- Text hint for servings field  -->
+    <string name="servings">Servings</string>
 
-    <!-- Recipe Detail -->
-    <string name="title_activity_detail">DetailActivity</string>
+    <!-- Text hint for difficulty field  -->
+    <string name="difficulty">Difficulty</string>
+
+    <!-- Text hint for ingredient field  -->
+    <string name="ingredient">Ingredient</string>
+
+    <!-- Dummy data for layout -->
+    <string name="dummy_time">1 hour 30 min</string>
+    <string name="dummy_servings">4 servings</string>
+    <string name="dummy_difficulty">Easy</string>
 </resources>

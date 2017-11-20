@@ -3,12 +3,12 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#FFC107</item>
-        <item name="colorPrimaryDark">#FFA000</item>
-        <item name="colorAccent">#3F51B5</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- Input Form Layout-->
+    <!-- Style for EditText field -->
     <style name="myEditTextLayout">
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginStart">@dimen/md_edge_horizontal_margin</item>
@@ -16,22 +16,25 @@
         <item name="android:paddingBottom">8dp</item>
     </style>
 
+    <!-- Style for error text of the inputTextLayout -->
     <style name="errorTextAppearance">
         <item name="android:textColor">#f44336</item>
         <item name="android:textSize">12sp</item>
     </style>
 
+    <!-- Style for counter text of the inputTextLayout -->
     <style name="counterText">
-        <item name="android:textColor">#aa5353cc</item>
+        <item name="android:textColor">@color/colorAccentDark</item>
     </style>
 
+    <!-- Style for an counter override text of the inputTextLayout -->
     <style name="counterOverride">
         <item name="android:textColor">#f44336</item>
     </style>
 
     <style name="inputFormHeader">
         <item name="android:layout_marginTop">8dp</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">24sp</item>
     </style>
 
@@ -61,7 +64,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">#000000</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:text">n/a</item>
     </style>
 
@@ -78,7 +81,42 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="detailTitle">
+        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">21sp</item>
+    </style>
 
+    <style name="detailContentTitle">
+        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- list item direction -->
+    <style name="detailDirectionTitle" parent="detailTitle">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <!-- activity_update_detail -->
+    <!-- Style for a category -->
+    <style name="CategoryStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+    </style>
+
+    <!-- Style for an EditText field -->
+    <style name="EditorFieldStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
