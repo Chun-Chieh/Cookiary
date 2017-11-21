@@ -13,11 +13,11 @@
     </string-array>
 
     <string-array name="measurement">
-        <item>Teaspoon</item>
-        <item>Tablespoon</item>
-        <item>Cup</item>
-        <item>Oz</item>
-        <item>Unit</item>
+        <item>teaspoon</item>
+        <item>tablespoon</item>
+        <item>cup</item>
+        <item>oz</item>
+        <item>unit</item>
     </string-array>
 
 </resources>

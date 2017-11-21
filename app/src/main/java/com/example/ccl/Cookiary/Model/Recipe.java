@@ -1,5 +1,9 @@
 package com.example.ccl.Cookiary.Model;
 
+/**
+ * @author Chun-Chieh Liang
+ *
+ */
 public class Recipe {
     private int mRecipe_id;
     private String mName, mAuthor;
@@ -32,6 +36,16 @@ public class Recipe {
             mCategory = category;
         }
         mImageResourceId = imageResourceId;
+    }
+
+    public Recipe(String name, String description, String category, int imageResourceId, int yield, String cookingTime, String difficulty){
+        mName = name;
+        mDescription = description;
+        mImageResourceId = imageResourceId;
+        mCategory = category;
+        mYield = yield;
+        mCookingTime = cookingTime;
+        mDifficulty = difficulty;
     }
 
     /**

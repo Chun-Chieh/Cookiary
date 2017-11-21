@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="fill_vertical"
+    android:layout_marginBottom="?attr/actionBarSize"
     android:background="@color/backgroundLightTheme"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.ccl.Cookiary.DetailActivity"
@@ -12,7 +13,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -33,13 +34,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:text="@string/dummy_time" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
@@ -60,13 +63,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:text="@string/dummy_servings" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
@@ -87,14 +92,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:text="@string/dummy_difficulty" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:background="@android:color/darker_gray" />
+
 
         <TextView
             style="@style/detailTitle"
@@ -107,15 +113,18 @@
             android:id="@+id/no_ingredient_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_margin="@dimen/md_space_between_content_area"
+            android:gravity="center"
             android:visibility="gone"
             tools:text="None" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/ingredient_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/md_space_between_content_area" />
+
 
         <TextView
             style="@style/detailTitle"
@@ -124,9 +133,24 @@
             android:layout_margin="@dimen/md_space_between_content_area"
             android:text="@string/category_directions" />
 
+        <TextView
+            android:id="@+id/no_direction_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/md_space_between_content_area"
+            android:gravity="center"
+            android:visibility="gone"
+            tools:text="None" />
+
+        <!-- the margin bottom is for bug that can't be filled the height -->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/direction_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginBottom="25dp"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/md_space_between_content_area" />
+
+
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

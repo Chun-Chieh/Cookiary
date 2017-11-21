@@ -66,24 +66,22 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.mDescription.setText(mRecipeList.get(position).getDescription());
         holder.mCategory.setText(mRecipeList.get(position).getCategory());
         holder.mDishPhoto.setImageResource(mRecipeList.get(position).getImageResourceId());
-//        Log.v("RecipeAdapter", mRecipeList.get(position).getName());
-//        Log.v("RecipeAdapter", mRecipeList.get(position).getDescription());
-//        Log.v("RecipeAdapter", String.valueOf(mRecipeList.get(position).getImageResourceId()));
 
+        // switch to recipeDetail activity if the photo is clicked
         holder.mDishPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("RecipeAdapter", "item: " + position + mRecipeList.get(position));
                 // Intent to DetailActivity
                 Intent recipeDetail = new Intent(holder.mContext, DetailActivity.class);
-                // pass the name to Recipe Detail
-                recipeDetail.putExtra("Recipe Name", holder.mName.getText().toString());
+
                 // pass the id to Recipe Detail
                 recipeDetail.putExtra("Recipe ID", holder.mId);
+
                 holder.mContext.startActivity(recipeDetail);
             }
         });
 
+        // show description if the photo is long-clicked
         holder.mDishPhoto.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

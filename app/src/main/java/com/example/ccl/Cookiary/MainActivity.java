@@ -1,5 +1,6 @@
 package com.example.ccl.Cookiary;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import com.example.ccl.Cookiary.Model.Recipe;
 import com.example.ccl.Cookiary.data.CookiaryDbHelper;
@@ -87,7 +90,13 @@ public class MainActivity extends AppCompatActivity {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data:
                 CookiaryDbHelper db = new CookiaryDbHelper(this);
-                db.addRecipe(new Recipe("Burger", "Tasty", "Main Dish", R.raw.burger));
+                db.addRecipe(new Recipe("Burger",
+                        "Tasty",
+                        "Main Dish",
+                        R.raw.burger,
+                        2,
+                        "1 hour",
+                        "Easy"));
                 displayRecipe();
                 return true;
         }
@@ -116,6 +125,17 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.no_data_text_view).setVisibility(View.GONE);
             mAdapter = new RecipeAdapter(myRecipes);
             mContentRecyclerView.setAdapter(mAdapter);
+            runLayoutAnimation();
         }
+    }
+
+    private void runLayoutAnimation() {
+        final Context context = mContentRecyclerView.getContext();
+        final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down);
+
+        mContentRecyclerView.setLayoutAnimation(controller);
+        mContentRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mContentRecyclerView.getAdapter().notifyDataSetChanged();
+        mContentRecyclerView.scheduleLayoutAnimation();
     }
 }

@@ -139,11 +139,10 @@
 
                 <!-- Step1 field -->
                 <EditText
-                    android:id="@+id/edit_recipe_step1"
+                    android:id="@+id/edit_recipe_direction"
                     style="@style/EditorFieldStyle"
-                    android:hint="Step1"
-                    android:inputType="textMultiLine"
-                    android:enabled="false"/>
+                    android:hint="@string/direction"
+                    android:inputType="textMultiLine" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

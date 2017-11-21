@@ -19,7 +19,7 @@ public class UpdateDetailActivity extends AppCompatActivity implements AdapterVi
     private EditText mNameEditText, mTimeEditText,  mServingsEditText, mDifficultyEditText;
     private EditText mIngredientNameEditText, mIngredientQuantityEditText;
     private Spinner mIngredientMeasurementSpinner;
-    private EditText mStep1;
+    private EditText mDirection;
 
 
     private int mRecipeId;
@@ -37,11 +37,12 @@ public class UpdateDetailActivity extends AppCompatActivity implements AdapterVi
         mIngredientNameEditText = findViewById(R.id.edit_ingredient_name);
         mIngredientQuantityEditText = findViewById(R.id.edit_ingredient_quantity);
         mIngredientMeasurementSpinner = findViewById(R.id.spinner_ingredient_unit);
+        mDirection= findViewById(R.id.edit_recipe_direction);
 
-        mStep1= findViewById(R.id.edit_recipe_step1);
-
+        // get recipe id from detail activity
         mRecipeId = getIntent().getIntExtra("Recipe ID", -1);
 
+        // setup ingredient measurement spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.measurement,
                 android.R.layout.simple_spinner_item);
@@ -57,7 +58,7 @@ public class UpdateDetailActivity extends AppCompatActivity implements AdapterVi
         super.onStart();
     }
 
-    // ------------- spinner ------------- //
+    // --------------------------------------- spinner --------------------------------------- //
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mMeasurement = parent.getItemAtPosition(position).toString();
@@ -74,7 +75,7 @@ public class UpdateDetailActivity extends AppCompatActivity implements AdapterVi
         return true;
     }
 
-    // ------------- menu ------------- //
+    // ----------------------------------------- menu ----------------------------------------- //
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -99,6 +100,7 @@ public class UpdateDetailActivity extends AppCompatActivity implements AdapterVi
     }
 
     private void saveUpdate(){
+        // overall information
         String name = mNameEditText.getText().toString();
         String cookingTime = mTimeEditText.getText().toString();
         String servings = mServingsEditText.getText().toString();
@@ -107,13 +109,25 @@ public class UpdateDetailActivity extends AppCompatActivity implements AdapterVi
         db.updateRecipeOverall(mRecipeId, name, cookingTime, Integer.parseInt(servings), difficulty);
 
 
+        // ingredient information
         String ingredientName = mIngredientNameEditText.getText().toString();
-
-        if (mIngredientQuantityEditText.getText().toString().equals("")){
+        // if the name or quantity of the ingredient is empty, make toast;
+        // Otherwise, call updateRecipeIngredients()
+        if (mIngredientNameEditText.getText().toString().equals("") || mIngredientQuantityEditText.getText().toString().equals("")){
             Toast.makeText(UpdateDetailActivity.this, "No ingredient has changed", Toast.LENGTH_SHORT).show();
         } else {
             int ingredientQuantity = Integer.parseInt(mIngredientQuantityEditText.getText().toString());
             db.updateRecipeIngredients(mRecipeId, ingredientName, ingredientQuantity, mMeasurement);
+        }
+
+        // direction information
+        String direction = mDirection.getText().toString();
+        // if the name or quantity of the ingredient is empty, make toast;
+        // Otherwise, call updateRecipeDirection()
+        if (mDirection.getText().toString().equals("") || mDirection.getText().toString().equals("")){
+            Toast.makeText(UpdateDetailActivity.this, "No direction has changed", Toast.LENGTH_SHORT).show();
+        } else {
+            db.addRecipeDirection(mRecipeId, direction);
         }
 
         db.close();

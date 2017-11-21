@@ -9,7 +9,7 @@
         android:icon="@drawable/ic_create_black_24dp"
         app:showAsAction="always" />
 
-    <item android:id="@+id/action_edit_ingredient"
-        android:title="@string/action_edit_ingredient"
+    <item android:id="@+id/action_insert_dummy_details"
+        android:title="@string/action_insert_dummy_details"
         app:showAsAction="never" />
 </menu>

@@ -2,32 +2,45 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/recipe_detail_card_view"
+    android:id="@+id/direction_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/md_edge_horizontal_margin"
     android:layout_marginStart="@dimen/md_edge_horizontal_margin"
-    android:layout_marginTop="@dimen/md_space_between_content_area">
+    android:layout_marginTop="@dimen/md_space_between_content_area"
+    android:minHeight="50dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            style="@style/detailDirectionTitle"
+        <!-- direction step -->
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:padding="@dimen/md_space_between_content_area"
-            android:layout_weight="3"
-            tools:text="Step 1" />
+            android:layout_margin="@dimen/md_space_between_content_area"
+            android:layout_weight="2">
 
+            <TextView
+                style="@style/detailDirectionTitle"
+                android:text="@string/direction_title_step" />
+
+            <TextView
+                android:id="@+id/direction_step_text_view"
+                style="@style/detailDirectionTitle"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                tools:text="1" />
+        </LinearLayout>
+
+        <!-- direction description -->
         <TextView
+            android:id="@+id/direction_description_text_view"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:padding="@dimen/md_space_between_content_area"
             android:layout_weight="7"
+            android:padding="@dimen/md_space_between_content_area"
             tools:text="Remove skillet, and place 1 refrigerated pie crust on top of the brown sugar. Top the pie crust with half the sliced apples. Sprinkle apples with 1/2 cup of sugar" />
-
     </LinearLayout>
 </android.support.v7.widget.CardView>

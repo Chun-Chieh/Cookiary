@@ -7,19 +7,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.ccl.Cookiary.Model.Direction;
 import com.example.ccl.Cookiary.Model.Ingredient;
 import com.example.ccl.Cookiary.Model.IngredientUsage;
 import com.example.ccl.Cookiary.Model.Recipe;
 import com.example.ccl.Cookiary.data.CookiaryContract.RecipeEntry;
 import com.example.ccl.Cookiary.data.CookiaryContract.IngredientEntry;
 import com.example.ccl.Cookiary.data.CookiaryContract.RecipeIngredientEntry;
+import com.example.ccl.Cookiary.data.CookiaryContract.RecipeDirectionEntry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Chun-Chieh Liang
- * Last update: Nov 7, 2017
+ * Last update: Nov 20, 2017
  * Database helper for Cookiary app.
  * Manages database creation and version management.
  */
@@ -73,14 +75,23 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
         // create statement for recipes_ingredients
         String SQL_CREATE_RECIPES_INGREDIENTS_TABLE = "CREATE TABLE " + RecipeIngredientEntry.TABLE_NAME + " ("
                 + RecipeIngredientEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + RECIPE_ID + " INTEGER, "
-                + INGREDIENT_ID + " INTEGER, "
+                + RECIPE_ID + " INTEGER NOT NULL, "
+                + INGREDIENT_ID + " INTEGER NOT NULL, "
                 + RecipeIngredientEntry.COLUMN_RI_QUANTITY + " INTEGER, "
                 + RecipeIngredientEntry.COLUMN_RI_MEASUREMENT + " TEXT);";
+
+
+        // create statement for recipes_directions
+        String SQL_CREATE_RECIPES_DIRECTIONS_TABLE = "CREATE TABLE " + RecipeDirectionEntry.TABLE_NAME + " ("
+                + RecipeDirectionEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + RECIPE_ID + " INTEGER NOT NULL, "
+                + RecipeDirectionEntry.COLUMN_RD_STEP + " INTEGER, "
+                + RecipeDirectionEntry.COLUMN_RD_DESCRIPTION + " TEXT NOT NULL);";
 
         db.execSQL(SQL_CREATE_RECIPES_TABLE);
         db.execSQL(SQL_CREATE_INGREDIENTS_TABLE);
         db.execSQL(SQL_CREATE_RECIPES_INGREDIENTS_TABLE);
+        db.execSQL(SQL_CREATE_RECIPES_DIRECTIONS_TABLE);
     }
 
     /**
@@ -170,6 +181,9 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
         values.put(RecipeEntry.COLUMN_RECIPE_CATEGORY, recipe.getCategory());
         values.put(RecipeEntry.COLUMN_RECIPE_DESCRIPTION, recipe.getDescription());
         values.put(RecipeEntry.COLUMN_RECIPE_PHOTO, recipe.getImageResourceId());
+        values.put(RecipeEntry.COLUMN_RECIPE_YIELD, recipe.getYield());
+        values.put(RecipeEntry.COLUMN_RECIPE_COOKINGTIME, recipe.getCookingTime());
+        values.put(RecipeEntry.COLUMN_RECIPE_DIFFICULTY, recipe.getDifficulty());
 
         // insert the Row
         long newRowId = db.insert(RecipeEntry.TABLE_NAME, null, values);
@@ -307,6 +321,7 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
                 null,
                 null);
 
+        // convert the ingredient id to the name in column 2
         while (cursor.moveToNext()) {
             IngredientUsage iu = new IngredientUsage(cursor.getInt(0),
                     cursor.getInt(1),
@@ -332,15 +347,14 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
     public long addRecipeIngredients(int recipe_id, long ingredient_id, int quantity, String measurement){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("recipe" + RecipeEntry._ID, recipe_id);
-        values.put("ingredient" + IngredientEntry._ID, ingredient_id);
+        values.put(RECIPE_ID, recipe_id);
+        values.put(INGREDIENT_ID, ingredient_id);
         values.put(RecipeIngredientEntry.COLUMN_RI_QUANTITY, quantity);
         values.put(RecipeIngredientEntry.COLUMN_RI_MEASUREMENT, measurement);
 
         long insertion_id = db.insert(RecipeIngredientEntry.TABLE_NAME, null, values);
 
         db.close();
-
         return insertion_id;
     }
 
@@ -359,9 +373,11 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
                     null,
                     null);
 
-        boolean notFound = cursor.getCount() == 0;
 
+        boolean notFound = cursor.getCount() == 0;
         long ingredientId;
+
+        // insert the ingredient if it is not found in ingredient table
         if (notFound) {
             addIngredient(ingredientName);
             cursor = db.query(IngredientEntry.TABLE_NAME,
@@ -402,5 +418,60 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
         if (count == 0) {
             addRecipeIngredients(recipe_id, ingredientId, quantity, measurement);
         }
+        db.close();
+    }
+
+    // ----------------------------------- Direction table ------------------------------------ //
+
+    public List<Direction> getRecipeDirections(int recipe_id) {
+        List<Direction> directionList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(RecipeDirectionEntry.TABLE_NAME,
+                null,
+                RECIPE_ID + "=?",
+                new String[]{String.valueOf(recipe_id)},
+                null,
+                null,
+                null);
+
+        while (cursor.moveToNext()) {
+            Direction direction = new Direction(cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getInt(2),
+                    cursor.getString(3));
+            directionList.add(direction);
+        }
+        cursor.close();
+        db.close();
+        return directionList;
+    }
+
+
+    public long addRecipeDirection(int recipe_id, String directionDescription) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        // search for the current amount of steps of a recipe
+        Cursor cursor = db.query(RecipeDirectionEntry.TABLE_NAME,
+                null,
+                RECIPE_ID + "=?",
+                new String[]{String.valueOf(recipe_id)},
+                null,
+                null,
+                null);
+
+        int existingSteps = cursor.getCount();
+        cursor.close();
+
+        db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(RECIPE_ID, recipe_id);
+        values.put(RecipeDirectionEntry.COLUMN_RD_STEP, existingSteps + 1);
+        values.put(RecipeDirectionEntry.COLUMN_RD_DESCRIPTION, directionDescription);
+
+        long insertion_id = db.insert(RecipeDirectionEntry.TABLE_NAME, null, values);
+
+        db.close();
+        return insertion_id;
     }
 }

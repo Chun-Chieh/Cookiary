@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/md_edge_horizontal_margin"
     android:layout_marginStart="@dimen/md_edge_horizontal_margin"
-    android:layout_marginBottom="@dimen/md_space_between_content_area"
+    android:layout_marginTop="@dimen/md_space_between_content_area"
     app:cardCornerRadius="2dp"
     app:cardElevation="2dp">
 
@@ -19,8 +19,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:clickable="true"
-            android:focusable="true"
+
             android:foreground="?android:attr/selectableItemBackground">
 
             <ImageView

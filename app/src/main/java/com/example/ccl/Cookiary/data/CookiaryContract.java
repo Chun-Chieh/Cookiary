@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 
 /**
  * @author Chun-Chieh Liang
- * Last update: Nov 7, 2017
+ * Last update: Nov 20, 2017
  * RecipeContract defines the data model of recipe and event related information.
  * This data is stored in the following tables:
  *
@@ -126,11 +126,11 @@ public final class CookiaryContract {
      * Each entry in the table represents a pair of a recipe and a ingredient.
      */
     public static final class RecipeIngredientEntry implements BaseColumns {
-        /** Name of database table for recipes */
+        /** Name of database table for ingredients of recipes */
         public final static String TABLE_NAME = "recipes_ingredients";
 
         /**
-         * Unique ID number for the pair.
+         * Unique ID number for the ingredient of the recipe.
          *
          * Type: INTEGER
          */
@@ -150,4 +150,35 @@ public final class CookiaryContract {
          */
         public final static String COLUMN_RI_MEASUREMENT = "measurement";
     }
+
+    /**
+     * Inner class that defines the table contents of the recipe_direction table
+     * Each entry in the table represents a pair of a recipe and a direction.
+     */
+    public static final class RecipeDirectionEntry implements BaseColumns {
+        /** Name of database table for directions of recipes */
+        public final static String TABLE_NAME = "recipes_directions";
+
+        /**
+         * Unique ID number for the direction of the recipe.
+         *
+         * Type: INTEGER
+         */
+        public final static String _ID = BaseColumns._ID;
+
+        /**
+         * Step for the direction of the recipe
+         *
+         * Type: INTEGER
+         */
+        public final static String COLUMN_RD_STEP = "step";
+
+        /**
+         *  Description for direction of the recipe
+         *
+         * Type: TEXT
+         */
+        public final static String COLUMN_RD_DESCRIPTION = "description";
+    }
+
 }

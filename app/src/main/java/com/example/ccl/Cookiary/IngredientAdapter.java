@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.ccl.Cookiary.Model.Ingredient;
 import com.example.ccl.Cookiary.Model.IngredientUsage;
 
 import java.util.ArrayList;
@@ -16,11 +15,11 @@ import java.util.List;
 
 /**
  * @author Chun-Chieh Liang
- * 11/19/17.
+ *         11/19/17.
  */
 
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.IngredientViewHolder> {
-    final int VIEW_TYPE_INGREDIENT= 0;
+    final int VIEW_TYPE_INGREDIENT = 0;
     final int VIEW_TYPE_INGREDIENT_USAGE = 1;
     Context mContext;
 

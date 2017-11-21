@@ -95,6 +95,8 @@
     <!-- list item direction -->
     <style name="detailDirectionTitle" parent="detailTitle">
         <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
     </style>
 
     <!-- activity_update_detail -->
