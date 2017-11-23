@@ -1,10 +1,10 @@
 package com.example.ccl.Cookiary;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,29 +14,32 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.ccl.Cookiary.Model.Direction;
-import com.example.ccl.Cookiary.Model.Ingredient;
-import com.example.ccl.Cookiary.Model.IngredientUsage;
-import com.example.ccl.Cookiary.Model.Recipe;
+import com.example.ccl.Cookiary.adapter.DirectionAdapter;
+import com.example.ccl.Cookiary.adapter.IngredientAdapter;
+import com.example.ccl.Cookiary.model.Direction;
+import com.example.ccl.Cookiary.model.IngredientUsage;
+import com.example.ccl.Cookiary.model.Recipe;
 import com.example.ccl.Cookiary.data.CookiaryDbHelper;
 
 import java.util.List;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity{
 
+    private ImageView mPhotoImageView;
     private TextView mCookingTimeTextView, mServingsTextView, mDifficultyTextView;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private RecyclerView mIngredientRecyclerView, mDirectionRecyclerView;
     private RecyclerView.Adapter mIngredientAdapter, mDirectionAdapter;
     private RecyclerView.LayoutManager mIngredientLayoutManager, mDirectionLayoutManager;
+
     private String mTitle;
     private int mId;
+    private List<IngredientUsage> mIngredientUsageList;
 
-    // testing textView
+    // textViews for no existing data
     private TextView mNoIngredientTextView, mNoDirectionTextView;
 
 
@@ -56,6 +59,7 @@ public class DetailActivity extends AppCompatActivity {
         mCookingTimeTextView = findViewById(R.id.cookingtime_text_view);
         mServingsTextView = findViewById(R.id.servings_text_view);
         mDifficultyTextView = findViewById(R.id.difficulty_text_view);
+        mPhotoImageView = findViewById(R.id.photo_image_view);
 
         mNoIngredientTextView = findViewById(R.id.no_ingredient_text_view);
         mNoDirectionTextView = findViewById(R.id.no_direction_text_view);
@@ -102,20 +106,31 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
             case R.id.action_edit:
+                // action edit does three things:
+                // 1. Edit the overall information
+                // 2. Add a new ingredient for the recipe or edit a existing ingredient
+                // 3. Add a new direction for the recipe
                 Intent intentUpdateDetail = new Intent(DetailActivity.this, UpdateDetailActivity.class);
                 intentUpdateDetail.putExtra("Recipe ID", mId);
                 startActivity(intentUpdateDetail);
                 return true;
+
             case R.id.action_insert_dummy_details:
+                // insert a ingredient and a direction
                 CookiaryDbHelper db = new CookiaryDbHelper(this);
+                db.updateRecipeOverall(mId,
+                        getResources().getString(R.string.dummy_recipe_name),
+                        getResources().getString(R.string.dummy_cooking_time),
+                        Integer.parseInt(getResources().getString(R.string.dummy_yield)),
+                        getResources().getString(R.string.dummy_difficulty));
                 db.updateRecipeIngredients(mId,
                         "Onion",
                         2,
                         "teaspoon");
                 db.addRecipeDirection(mId, getResources().getString(R.string.dummy_description));
+                db.close();
                 showRecipeDetail();
                 return true;
         }
@@ -134,7 +149,7 @@ public class DetailActivity extends AppCompatActivity {
         mCookingTimeTextView.setText(myRecipe.getCookingTime());
         mServingsTextView.setText(servingsString);
         mDifficultyTextView.setText(myRecipe.getDifficulty());
-
+        mPhotoImageView.setImageResource(myRecipe.getImageResourceId());
 
 
         List<IngredientUsage> ingredientUsageList;

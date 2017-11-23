@@ -5,11 +5,11 @@
         <item>Appetizer</item>
         <item>Beverage</item>
         <item>Breakfast</item>
-        <item>Brunch Samoa</item>
         <item>Dessert</item>
         <item>Main Dish</item>
-        <item>Side Dish</item>
+        <item>Salad</item>
         <item>Snack</item>
+        <item>Soup</item>
     </string-array>
 
     <string-array name="measurement">

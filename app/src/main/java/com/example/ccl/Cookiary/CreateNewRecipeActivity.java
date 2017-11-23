@@ -15,12 +15,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.ccl.Cookiary.Model.Recipe;
+import com.example.ccl.Cookiary.model.Recipe;
 import com.example.ccl.Cookiary.data.CookiaryDbHelper;
 
 /**
  * @author Chun-Chieh Liang
- * Last update: Nov, 7, 2017
+ *         Last update: Nov, 7, 2017
  */
 
 public class CreateNewRecipeActivity extends AppCompatActivity {
@@ -29,6 +29,7 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
     private AutoCompleteTextView mDishCategory;
     private Button mCreateButton;
     private String name, description, category;
+    private int photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,14 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
         mDescriptionEditText.setOnFocusChangeListener(new MyOnFocusChangeListener(mDescriptionEditText));
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+
+        // animated transition
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,6 +69,7 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
 
     /**
      * do actions whether the name and description is valid or not
+     *
      * @param item menu item
      * @return true if the item is clicked
      */
@@ -74,10 +84,12 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
                     category = mDishCategory.getText().toString();
                     insertRecipe();
                     Intent i = new Intent(CreateNewRecipeActivity.this, MainActivity.class);
-                    i.putExtra("New Recipe Prompt", name +" has created successfully!");
+                    i.putExtra("New Recipe Prompt", name + " has created successfully!");
                     startActivity(i);
-                }
-                else{
+
+                    // animated transition
+                    overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+                } else {
                     Snackbar.make(findViewById(R.id.create_new_recipe_form), "Check the error messages!", Snackbar.LENGTH_SHORT).show();
                 }
                 return true;
@@ -88,6 +100,7 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
 
     /**
      * check the name if it's valid (not null)
+     *
      * @return false if the name is empty. Otherwise, return false.
      */
     public boolean isNameValid() {
@@ -104,6 +117,7 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
 
     /**
      * check the description if it is valid (less than 50 words)
+     *
      * @return false if the string length is longer than 50. Otherwise, return true.
      */
     public boolean isDescValid() {
@@ -120,17 +134,49 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
     }
 
     /**
-     * call the addRecipe() as a instance of CookiaryDbHelper
+     * Insert a recipe into database
      */
     private void insertRecipe() {
         CookiaryDbHelper db = new CookiaryDbHelper(this);
-        db.addRecipe(new Recipe(name, description, category, R.raw.burger));
+        // if the user doesn't provide photos, use the default photos based on the category
+        if (photo == 0) {
+            switch (category){
+                case "Appetizer":
+                    photo = R.raw.default_appetizer;
+                    break;
+                case "Beverage":
+                    photo = R.raw.default_baverage;
+                    break;
+                case "Breakfast":
+                    photo = R.raw.default_breakfast;
+                    break;
+                case "Dessert":
+                    photo = R.raw.default_dessert;
+                    break;
+                case "Main Dish":
+                    photo = R.raw.default_main_dish;
+                    break;
+                case "Salad":
+                    photo = R.raw.default_salad;
+                    break;
+                case "Snack":
+                    photo = R.raw.default_snack;
+                    break;
+                case "Soup":
+                    photo = R.raw.default_soup;
+                    break;
+                default:
+                    photo = R.raw.default_uncategorized;
+            }
+        }
+
+        db.addRecipe(new Recipe(name, description, category, photo));
         db.close();
     }
 
 
     /**
-     * check the textView real-time if it's changed
+     * Check the textView real-time if it's changed
      */
     private class MyTextWatcher implements TextWatcher {
 
@@ -172,8 +218,7 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
         public void onFocusChange(View view, boolean hasFocus) {
             if (!hasFocus) {
                 isNameValid(); // only the name is required
-            }
-            else {
+            } else {
                 EditTextView.addTextChangedListener(new MyTextWatcher(EditTextView));
             }
         }

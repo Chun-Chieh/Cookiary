@@ -24,10 +24,11 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
+                android:id="@+id/photo_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@raw/burger"
+                tools:src="@raw/burger"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7" />
 

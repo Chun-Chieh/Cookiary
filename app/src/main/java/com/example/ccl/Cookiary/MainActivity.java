@@ -12,11 +12,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
-import com.example.ccl.Cookiary.Model.Recipe;
+import com.example.ccl.Cookiary.adapter.RecipeAdapter;
+import com.example.ccl.Cookiary.model.Recipe;
 import com.example.ccl.Cookiary.data.CookiaryDbHelper;
 
 import java.util.List;
@@ -28,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+
     /**
      * initialize the layout (RecyclerView) and setup the adapter (RecipeAdapter)
      * read the database (Recipiary.db)
      * set up the intents (DetailActivity and CreateNewRecipe) for image and FAB
+     *
      * @param savedInstanceState inherited from AppCompatActivity
      */
     @Override
@@ -57,14 +61,31 @@ public class MainActivity extends AppCompatActivity {
             showMsg("Initiate successfully!");
         }
 
+        mContentRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
+
         // set up the onClickListener for the fab
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.create_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //showMsg("Click!!");
                 Intent i = new Intent(MainActivity.this, CreateNewRecipeActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });
     }
@@ -90,20 +111,22 @@ public class MainActivity extends AppCompatActivity {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data:
                 CookiaryDbHelper db = new CookiaryDbHelper(this);
-                db.addRecipe(new Recipe("Burger",
+                db.addRecipe(new Recipe(getResources().getString(R.string.dummy_recipe_name),
                         "Tasty",
                         "Main Dish",
                         R.raw.burger,
-                        2,
-                        "1 hour",
-                        "Easy"));
+                        Integer.parseInt(getResources().getString(R.string.dummy_yield)),
+                        getResources().getString(R.string.dummy_cooking_time),
+                        getResources().getString(R.string.dummy_difficulty)));
                 displayRecipe();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     /**
      * show a snackbar with custom text messages
+     *
      * @param message the text to show
      */
     private void showMsg(String message) {
@@ -118,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         CookiaryDbHelper db = new CookiaryDbHelper(this);
         List<Recipe> myRecipes = db.getAllRecipes();
 
-        if (myRecipes.size()==0) {
+        if (myRecipes.size() == 0) {
             findViewById(R.id.no_data_text_view).setVisibility(VISIBLE);
             Log.v("MainActivity", "No Data");
         } else {

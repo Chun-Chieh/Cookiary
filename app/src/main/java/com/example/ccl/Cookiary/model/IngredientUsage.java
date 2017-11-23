@@ -1,4 +1,4 @@
-package com.example.ccl.Cookiary.Model;
+package com.example.ccl.Cookiary.model;
 
 /**
  * @author Chun-Chieh Liang

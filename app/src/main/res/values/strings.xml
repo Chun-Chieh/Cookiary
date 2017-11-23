@@ -77,11 +77,13 @@
     <!-- Name of transition -->
     <string name="my_activity_transition">my_activity_transition</string>
 
-    <!-- Dummy data for layout -->
-    <string name="dummy_time">1 hour 30 min</string>
-    <string name="dummy_servings">4 servings</string>
-    <string name="dummy_difficulty">Easy</string>
+    <!-- Text for recycler swipe -->
+    <string name="delete">DELETE</string>
 
-    <!-- Dummy direction description for insert dummy details -->
+    <!-- Dummy data for inserting dummy details -->
+    <string name="dummy_recipe_name">Burger</string>
+    <string name="dummy_cooking_time">1 Hour 30 Minutes</string>
+    <string name="dummy_yield">4</string>
+    <string name="dummy_difficulty">Easy</string>
     <string name="dummy_description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</string>
 </resources>

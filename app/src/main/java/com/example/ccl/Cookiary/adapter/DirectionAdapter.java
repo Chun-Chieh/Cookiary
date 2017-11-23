@@ -1,4 +1,4 @@
-package com.example.ccl.Cookiary;
+package com.example.ccl.Cookiary.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.ccl.Cookiary.Model.Direction;
+import com.example.ccl.Cookiary.R;
+import com.example.ccl.Cookiary.model.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  * 11/20/17.
  */
 
-public class DirectionAdapter extends RecyclerView.Adapter<DirectionAdapter.DirectionViewHolder>{
+public class DirectionAdapter extends RecyclerView.Adapter<DirectionAdapter.DirectionViewHolder> {
 
     private List<Direction> mDirectionList = new ArrayList<>();
 
@@ -61,5 +62,20 @@ public class DirectionAdapter extends RecyclerView.Adapter<DirectionAdapter.Dire
     @Override
     public int getItemCount() {
         return mDirectionList.size();
+    }
+
+
+    /**
+     * Notify the item removed by position to perform recycler view delete animations
+     * @param position
+     */
+    public void removeDirection(int position) {
+        mDirectionList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreItem(Direction directionItem, int position) {
+        mDirectionList.add(position, directionItem);
+        notifyItemInserted(position);
     }
 }

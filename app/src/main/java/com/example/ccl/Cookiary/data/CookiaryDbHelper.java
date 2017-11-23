@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.ccl.Cookiary.Model.Direction;
-import com.example.ccl.Cookiary.Model.Ingredient;
-import com.example.ccl.Cookiary.Model.IngredientUsage;
-import com.example.ccl.Cookiary.Model.Recipe;
+import com.example.ccl.Cookiary.model.Direction;
+import com.example.ccl.Cookiary.model.Ingredient;
+import com.example.ccl.Cookiary.model.IngredientUsage;
+import com.example.ccl.Cookiary.model.Recipe;
 import com.example.ccl.Cookiary.data.CookiaryContract.RecipeEntry;
 import com.example.ccl.Cookiary.data.CookiaryContract.IngredientEntry;
 import com.example.ccl.Cookiary.data.CookiaryContract.RecipeIngredientEntry;
@@ -21,12 +21,12 @@ import java.util.List;
 
 /**
  * @author Chun-Chieh Liang
- * Last update: Nov 20, 2017
- * Database helper for Cookiary app.
- * Manages database creation and version management.
+ *         Last update: Nov 20, 2017
+ *         Database helper for Cookiary app.
+ *         Manages database creation and version management.
  */
 
-public class CookiaryDbHelper extends SQLiteOpenHelper{
+public class CookiaryDbHelper extends SQLiteOpenHelper {
 
     public static final String LOG_TAG = CookiaryDbHelper.class.getSimpleName();
 
@@ -39,7 +39,6 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
     // IDs for the recipe ingredient table
     private static final String RECIPE_ID = "recipe" + RecipeEntry._ID;
     private static final String INGREDIENT_ID = "ingredient" + IngredientEntry._ID;
-
 
 
     /**
@@ -57,7 +56,7 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         // create statement for recipes
-        String SQL_CREATE_RECIPES_TABLE =  "CREATE TABLE " + RecipeEntry.TABLE_NAME + " ("
+        String SQL_CREATE_RECIPES_TABLE = "CREATE TABLE " + RecipeEntry.TABLE_NAME + " ("
                 + RecipeEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + RecipeEntry.COLUMN_RECIPE_TITLE + " TEXT NOT NULL, "
                 + RecipeEntry.COLUMN_RECIPE_CATEGORY + " TEXT, "
@@ -103,8 +102,10 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
     }
 
     // ------------------------------------- Recipe table ------------------------------------- //
+
     /**
      * Wrap the result to a recipe object
+     *
      * @param cursor the db cursor
      * @return the recipe object
      */
@@ -123,6 +124,7 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
     /**
      * Get all the recipes in the database
+     *
      * @return a list of recipes
      */
     public List<Recipe> getAllRecipes() {
@@ -149,6 +151,7 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
     /**
      * Get the recipe information by ID
+     *
      * @param id
      * @return the recipe which matched the ID
      */
@@ -157,8 +160,8 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
         Cursor cursor = db.query(RecipeEntry.TABLE_NAME,
                 null,
-                RecipeEntry._ID+"=?",
-                new String[] { String.valueOf(id) },
+                RecipeEntry._ID + "=?",
+                new String[]{String.valueOf(id)},
                 null,
                 null,
                 null);
@@ -171,6 +174,7 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
     /**
      * insert the values of a recipe object to the recipe table
+     *
      * @param recipe a object of Recipe
      */
     public void addRecipe(Recipe recipe) {
@@ -197,13 +201,14 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
     /**
      * Update the overall information of the recipe based on the ID
-     * @param id recipe id
-     * @param name title
+     *
+     * @param id          recipe id
+     * @param name        title
      * @param cookingTime cooking time
-     * @param yield servings
-     * @param difficulty difficulty
+     * @param yield       servings
+     * @param difficulty  difficulty
      */
-    public void updateRecipeOverall(int id, String name, String cookingTime, int yield, String difficulty ) {
+    public void updateRecipeOverall(int id, String name, String cookingTime, int yield, String difficulty) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // New value for one column
@@ -215,7 +220,7 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
         // Which row to update, based on the ID
         String selection = RecipeEntry._ID + "=?";
-        String[] selectionArgs = { String.valueOf(id) };
+        String[] selectionArgs = {String.valueOf(id)};
 
         int count = db.update(
                 RecipeEntry.TABLE_NAME,
@@ -228,16 +233,17 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
     /**
      * Get the ingredient information by ingredient ID
+     *
      * @param id
      * @return the ingredient which matched the ID
      */
-    public Ingredient getIngredient(int id){
+    public Ingredient getIngredient(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(IngredientEntry.TABLE_NAME,
                 null,
-                IngredientEntry._ID+"=?",
-                new String[] { String.valueOf(id) },
+                IngredientEntry._ID + "=?",
+                new String[]{String.valueOf(id)},
                 null,
                 null,
                 null);
@@ -254,6 +260,7 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
     /**
      * Add new ingredient to the ingredient table
+     *
      * @param ingredient object
      */
     public long addIngredient(Ingredient ingredient) {
@@ -272,6 +279,7 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
     /**
      * Add new ingredient to the ingredient table
+     *
      * @param ingredientName name of the ingredient
      */
     public void addIngredient(String ingredientName) {
@@ -288,15 +296,16 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
     /**
      * Get all the ingredients id of a recipe
+     *
      * @param recipe_id the recipe
      */
-    public List<Integer> getRecipeIngredientsIds (int recipe_id){
+    public List<Integer> getRecipeIngredientsIds(int recipe_id) {
         List<Integer> ingredientIdList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(RecipeIngredientEntry.TABLE_NAME,
                 new String[]{INGREDIENT_ID},
-                RECIPE_ID+"=?",
-                new String[] { String.valueOf(recipe_id) },
+                RECIPE_ID + "=?",
+                new String[]{String.valueOf(recipe_id)},
                 null,
                 null,
                 null);
@@ -310,13 +319,13 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
         return ingredientIdList;
     }
 
-    public List<IngredientUsage> getRecipeIngredientsUsage (int recipe_id) {
+    public List<IngredientUsage> getRecipeIngredientsUsage(int recipe_id) {
         List<IngredientUsage> ingredientUsageList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(RecipeIngredientEntry.TABLE_NAME,
                 null,
-                RECIPE_ID+"=?",
-                new String[] { String.valueOf(recipe_id) },
+                RECIPE_ID + "=?",
+                new String[]{String.valueOf(recipe_id)},
                 null,
                 null,
                 null);
@@ -338,13 +347,14 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
     /**
      * Add the ingredients for a recipe
+     *
      * @param recipe_id
      * @param ingredient_id
      * @param quantity
      * @param measurement
      * @return
      */
-    public long addRecipeIngredients(int recipe_id, long ingredient_id, int quantity, String measurement){
+    public long addRecipeIngredients(int recipe_id, long ingredient_id, int quantity, String measurement) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(RECIPE_ID, recipe_id);
@@ -361,18 +371,18 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
     /**
      * Update the ingredients of a recipe.
      * Add the ingredient, if the ingredient (name) is not in the ingredient table
+     *
      * @param recipe_id
      */
     public void updateRecipeIngredients(int recipe_id, String ingredientName, int quantity, String measurement) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(IngredientEntry.TABLE_NAME,
-                    null,
-                    IngredientEntry.COLUMN_INGREDIENT_NAME + "=?",
-                    new String[]{ingredientName},
-                    null,
-                    null,
-                    null);
-
+                null,
+                IngredientEntry.COLUMN_INGREDIENT_NAME + "=?",
+                new String[]{ingredientName},
+                null,
+                null,
+                null);
 
         boolean notFound = cursor.getCount() == 0;
         long ingredientId;
@@ -397,7 +407,6 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
         cursor.close();
 
-
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -406,8 +415,8 @@ public class CookiaryDbHelper extends SQLiteOpenHelper{
 
 
         // update the ingredients quantity and measurements
-        String selection = RECIPE_ID + "=? AND " + INGREDIENT_ID +"=?" ;
-        String[] selectionArgs = { String.valueOf(recipe_id), String.valueOf(ingredientId)};
+        String selection = RECIPE_ID + "=? AND " + INGREDIENT_ID + "=?";
+        String[] selectionArgs = {String.valueOf(recipe_id), String.valueOf(ingredientId)};
 
         int count = db.update(
                 RecipeIngredientEntry.TABLE_NAME,

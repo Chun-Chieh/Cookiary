@@ -11,8 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.ccl.Cookiary.Model.Ingredient;
-import com.example.ccl.Cookiary.Model.Recipe;
+import com.example.ccl.Cookiary.model.Recipe;
 import com.example.ccl.Cookiary.data.CookiaryDbHelper;
 
 public class UpdateDetailActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {

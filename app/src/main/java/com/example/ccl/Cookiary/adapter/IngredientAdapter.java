@@ -1,4 +1,4 @@
-package com.example.ccl.Cookiary;
+package com.example.ccl.Cookiary.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -6,9 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.ccl.Cookiary.Model.IngredientUsage;
+import com.example.ccl.Cookiary.R;
+import com.example.ccl.Cookiary.model.Ingredient;
+import com.example.ccl.Cookiary.model.IngredientUsage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,18 +39,20 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     public static class IngredientViewHolder extends RecyclerView.ViewHolder {
         int mId;
         Context mContext;
-        CardView mCardView;
         TextView mName;
         TextView mQuantity;
         TextView mMeasurement;
+        public RelativeLayout viewBackground;
+        public LinearLayout viewForeground;
 
-        IngredientViewHolder(View itemView) {
+        public IngredientViewHolder(View itemView) {
             super(itemView);
             mContext = itemView.getContext();
-            mCardView = itemView.findViewById(R.id.ingredient_card_view);
             mName = itemView.findViewById(R.id.ingredient_name_text_view);
             mQuantity = itemView.findViewById(R.id.ingredient_quantity_text_view);
             mMeasurement = itemView.findViewById(R.id.ingredient_measurement_text_view);
+            viewBackground = itemView.findViewById(R.id.view_background);
+            viewForeground = itemView.findViewById(R.id.view_foreground);
         }
     }
 
@@ -69,5 +75,20 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     @Override
     public int getItemCount() {
         return mIngredientUsageList.size();
+    }
+
+
+    /**
+     * Notify the item removed by position to perform recycler view delete animations
+     * @param position
+     */
+    public void removeIngredient(int position) {
+        mIngredientUsageList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreIngredient(IngredientUsage ingredienUsagetItem, int position) {
+        mIngredientUsageList.add(position, ingredienUsagetItem);
+        notifyItemInserted(position);
     }
 }

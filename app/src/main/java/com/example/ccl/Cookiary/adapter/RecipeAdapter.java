@@ -1,17 +1,25 @@
-package com.example.ccl.Cookiary;
+package com.example.ccl.Cookiary.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.ccl.Cookiary.Model.Recipe;
+import com.example.ccl.Cookiary.DetailActivity;
+import com.example.ccl.Cookiary.R;
+import com.example.ccl.Cookiary.data.CookiaryDbHelper;
+import com.example.ccl.Cookiary.model.IngredientUsage;
+import com.example.ccl.Cookiary.model.Recipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +44,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         TextView mDescription;
         TextView mCategory;
         ImageView mDishPhoto;
+
 
         RecipeViewHolder(View itemView) {
             super(itemView);
@@ -76,7 +85,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
                 // pass the id to Recipe Detail
                 recipeDetail.putExtra("Recipe ID", holder.mId);
-
                 holder.mContext.startActivity(recipeDetail);
             }
         });
@@ -86,8 +94,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             @Override
             public boolean onLongClick(View v) {
                 if (!hasDescShown) {
-                holder.mDescription.setVisibility(View.VISIBLE);
-                hasDescShown = true;
+                    holder.mDescription.setVisibility(View.VISIBLE);
+                    hasDescShown = true;
                 }
                 else {
                     holder.mDescription.setVisibility(View.GONE);
@@ -102,5 +110,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     @Override
     public int getItemCount() {
         return mRecipeList.size();
+    }
+
+
+    public void removeRecipe(int position) {
+        mRecipeList.remove(position);
+        Log.v("RecipeAdapter", "List Position: "
+                + ", Adapter Position: " + position);
+        notifyItemRemoved(position);
     }
 }

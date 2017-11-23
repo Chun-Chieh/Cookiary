@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="3"
-                android:text="@string/dummy_time" />
+                tools:text="@string/dummy_cooking_time" />
         </LinearLayout>
 
         <View
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="3"
-                android:text="@string/dummy_servings" />
+                tools:text="@string/dummy_yield" />
         </LinearLayout>
 
         <View
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="3"
-                android:text="@string/dummy_difficulty" />
+                tools:text="@string/dummy_difficulty" />
         </LinearLayout>
 
         <View
