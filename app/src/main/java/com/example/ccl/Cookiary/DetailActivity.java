@@ -37,6 +37,7 @@ public class DetailActivity extends AppCompatActivity{
 
     private String mTitle;
     private int mId;
+    private String mImageTransitionName;
     private List<IngredientUsage> mIngredientUsageList;
 
     // textViews for no existing data
@@ -52,7 +53,11 @@ public class DetailActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+//        supportPostponeEnterTransition();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         mIngredientRecyclerView = (RecyclerView) findViewById(R.id.ingredient_recycler_view);
         mDirectionRecyclerView = (RecyclerView) findViewById(R.id.direction_recycler_view);
         mCollapsingToolbarLayout = findViewById(R.id.toolbar_layout);
@@ -60,13 +65,13 @@ public class DetailActivity extends AppCompatActivity{
         mServingsTextView = findViewById(R.id.servings_text_view);
         mDifficultyTextView = findViewById(R.id.difficulty_text_view);
         mPhotoImageView = findViewById(R.id.photo_image_view);
-
         mNoIngredientTextView = findViewById(R.id.no_ingredient_text_view);
         mNoDirectionTextView = findViewById(R.id.no_direction_text_view);
 
-        setSupportActionBar(toolbar);
 
-        mId = getIntent().getIntExtra("Recipe ID", -1);
+        mImageTransitionName = getIntent().getStringExtra(MainActivity.EXTRA_RECIPE_IMAGE_TRANSITION_NAME);
+
+        mId = getIntent().getIntExtra(MainActivity.EXTRA_RECIPE_ID, -1);
         if (mId == -1) {
             Log.e("DetailActivity", "Error! The recipe is not found");
         } else {
@@ -93,6 +98,7 @@ public class DetailActivity extends AppCompatActivity{
     @Override
     protected void onStart() {
         super.onStart();
+
         showRecipeDetail();
     }
 
@@ -133,6 +139,14 @@ public class DetailActivity extends AppCompatActivity{
                 db.close();
                 showRecipeDetail();
                 return true;
+
+            case R.id.action_delete_recipe:
+                deleteRecipe();
+
+                Intent intentDeleteSuccessful = new Intent(DetailActivity.this, MainActivity.class);
+                startActivity(intentDeleteSuccessful);
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -145,11 +159,19 @@ public class DetailActivity extends AppCompatActivity{
 
         String servingsString = myRecipe.getYield()+ " Servings";
 
+
         mCollapsingToolbarLayout.setTitle(myRecipe.getName());
         mCookingTimeTextView.setText(myRecipe.getCookingTime());
         mServingsTextView.setText(servingsString);
         mDifficultyTextView.setText(myRecipe.getDifficulty());
         mPhotoImageView.setImageResource(myRecipe.getImageResourceId());
+
+        // set transition
+//        mPhotoImageView.setTransitionName(mImageTransitionName);
+
+
+
+        Log.v("Detail Activity", mId + ", " + mImageTransitionName);
 
 
         List<IngredientUsage> ingredientUsageList;
@@ -183,5 +205,11 @@ public class DetailActivity extends AppCompatActivity{
             mDirectionAdapter = new DirectionAdapter(directionList);
             mDirectionRecyclerView.setAdapter(mDirectionAdapter);
         }
+    }
+
+    private void deleteRecipe(){
+        CookiaryDbHelper db = new CookiaryDbHelper(this);
+        db.deleteRecipe(mId);
+
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.ccl.Cookiary.DetailActivity;
 import com.example.ccl.Cookiary.R;
+import com.example.ccl.Cookiary.RecipeItemClickListener;
 import com.example.ccl.Cookiary.data.CookiaryDbHelper;
 import com.example.ccl.Cookiary.model.IngredientUsage;
 import com.example.ccl.Cookiary.model.Recipe;
@@ -28,11 +30,13 @@ import java.util.List;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
     private List<Recipe> mRecipeList = new ArrayList<>();
+    private final RecipeItemClickListener mRecipeItemClickListener;
     boolean hasDescShown = false;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RecipeAdapter(List<Recipe> recipeList) {
+    public RecipeAdapter(List<Recipe> recipeList, RecipeItemClickListener recipeItemClickListener) {
         mRecipeList = recipeList;
+        mRecipeItemClickListener = recipeItemClickListener;
     }
 
     // Provide a reference to the views for each data item
@@ -70,22 +74,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     @Override
     public void onBindViewHolder(final RecipeViewHolder holder, final int position) {
         // get element from recipeList at this position and replace the contents of the view with that element
+        final Recipe recipe = mRecipeList.get(position);
         holder.mId = mRecipeList.get(position).getRecipe_id();
         holder.mName.setText(mRecipeList.get(position).getName());
         holder.mDescription.setText(mRecipeList.get(position).getDescription());
         holder.mCategory.setText(mRecipeList.get(position).getCategory());
         holder.mDishPhoto.setImageResource(mRecipeList.get(position).getImageResourceId());
 
-        // switch to recipeDetail activity if the photo is clicked
+        ViewCompat.setTransitionName(holder.mDishPhoto, String.valueOf(recipe.getImageResourceId()));
+
+        // set the onclick listener for dish thumbnail
         holder.mDishPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent to DetailActivity
-                Intent recipeDetail = new Intent(holder.mContext, DetailActivity.class);
-
-                // pass the id to Recipe Detail
-                recipeDetail.putExtra("Recipe ID", holder.mId);
-                holder.mContext.startActivity(recipeDetail);
+                mRecipeItemClickListener.onRecipeItemClick(holder.getAdapterPosition(), recipe, holder.mDishPhoto);
             }
         });
 

@@ -2,30 +2,39 @@ package com.example.ccl.Cookiary;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.ImageView;
 
 import com.example.ccl.Cookiary.adapter.RecipeAdapter;
-import com.example.ccl.Cookiary.model.Recipe;
 import com.example.ccl.Cookiary.data.CookiaryDbHelper;
+import com.example.ccl.Cookiary.model.Recipe;
 
 import java.util.List;
 
 import static android.view.View.VISIBLE;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecipeItemClickListener{
+
+    public static final String EXTRA_RECIPE_ID = "recipe_id";
+    public static final String EXTRA_RECIPE_IMAGE_TRANSITION_NAME = "recipe_image_transition_name";
+
     private RecyclerView mContentRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -61,22 +70,7 @@ public class MainActivity extends AppCompatActivity {
             showMsg("Initiate successfully!");
         }
 
-        mContentRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                return false;
-            }
 
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
 
         // set up the onClickListener for the fab
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.create_fab);
@@ -88,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });
+
+        runLayoutAnimation();
     }
 
     @Override
@@ -124,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     /**
      * show a snackbar with custom text messages
      *
@@ -146,9 +143,8 @@ public class MainActivity extends AppCompatActivity {
             Log.v("MainActivity", "No Data");
         } else {
             findViewById(R.id.no_data_text_view).setVisibility(View.GONE);
-            mAdapter = new RecipeAdapter(myRecipes);
+            mAdapter = new RecipeAdapter(myRecipes, this);
             mContentRecyclerView.setAdapter(mAdapter);
-            runLayoutAnimation();
         }
     }
 
@@ -158,7 +154,37 @@ public class MainActivity extends AppCompatActivity {
 
         mContentRecyclerView.setLayoutAnimation(controller);
         mContentRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mContentRecyclerView.getAdapter().notifyDataSetChanged();
+//        mContentRecyclerView.getAdapter().notifyDataSetChanged();
         mContentRecyclerView.scheduleLayoutAnimation();
+    }
+
+
+    /**
+     * Show activity's transition
+     * @param pos
+     * @param recipe
+     * @param shareImageView
+     */
+    @Override
+    public void onRecipeItemClick(int pos, Recipe recipe, ImageView shareImageView) {
+        // Intent to DetailActivity
+        Intent recipeDetail = new Intent(this, DetailActivity.class);
+
+        // pass the id to Recipe Detail
+        recipeDetail.putExtra(EXTRA_RECIPE_ID, recipe.getRecipe_id());
+        recipeDetail.putExtra(EXTRA_RECIPE_IMAGE_TRANSITION_NAME, ViewCompat.getTransitionName(shareImageView));
+
+        View statusBar = findViewById(android.R.id.statusBarBackground);
+        View navigationBar = findViewById(android.R.id.navigationBarBackground);
+
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this
+                , Pair.create((View)shareImageView, shareImageView.getTransitionName())
+                , Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME)
+                , Pair.create(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME));
+
+
+//        startActivity(recipeDetail, options.toBundle());
+        startActivity(recipeDetail);
     }
 }

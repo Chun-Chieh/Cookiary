@@ -26,6 +26,9 @@
     <!-- Label for overflow menu option that insert dummy ingredients in the recipeDetail -->
     <string name="action_insert_dummy_details">Insert Dummy Details</string>
 
+    <!-- Label for overflow menu option that delete the recipe in the recipeDetail -->
+    <string name="action_delete_recipe">Delete This Recipe</string>
+
     <!-- Label for overflow menu option that save the input data -->
     <string name="action_save">Save</string>
 
@@ -50,8 +53,11 @@
     <!-- Text for the title of directions -->
     <string name="direction_title_step">Step</string>
 
-    <!-- Text hint for name field  -->
+    <!-- Text hint for name required field  -->
     <string name="name_required">Name*</string>
+
+    <!-- Text hint for name field  -->
+    <string name="name">Name</string>
 
     <!-- Text hint for description field  -->
     <string name="description">Description</string>
@@ -60,10 +66,10 @@
     <string name="category">Category</string>
 
     <!-- Text hint for time field  -->
-    <string name="time">Total Time</string>
+    <string name="time">Cooking Time</string>
 
     <!-- Text hint for servings field  -->
-    <string name="servings">Servings</string>
+    <string name="yield">Yield</string>
 
     <!-- Text hint for difficulty field  -->
     <string name="difficulty">Difficulty</string>
@@ -86,4 +92,6 @@
     <string name="dummy_yield">4</string>
     <string name="dummy_difficulty">Easy</string>
     <string name="dummy_description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</string>
+
+
 </resources>

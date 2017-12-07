@@ -229,6 +229,27 @@ public class CookiaryDbHelper extends SQLiteOpenHelper {
                 selectionArgs);
     }
 
+
+    public void deleteRecipe(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Which row to delete, based on the ID
+        String[] selectionArgs = {String.valueOf(id)};
+
+        db.delete(RecipeEntry.TABLE_NAME,
+                RecipeEntry._ID + "=?",
+                selectionArgs);
+
+        db.delete(RecipeIngredientEntry.TABLE_NAME,
+                RECIPE_ID + "=?",
+                selectionArgs);
+
+        db.delete(RecipeDirectionEntry.TABLE_NAME,
+                RECIPE_ID + "=?",
+                selectionArgs);
+        db.close();
+    }
+
     // ----------------------------------- Ingredient table ----------------------------------- //
 
     /**
