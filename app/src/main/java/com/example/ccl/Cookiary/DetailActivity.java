@@ -1,6 +1,7 @@
 package com.example.ccl.Cookiary;
 
 import android.content.Intent;
+import android.database.CursorIndexOutOfBoundsException;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -35,10 +36,8 @@ public class DetailActivity extends AppCompatActivity{
     private RecyclerView.Adapter mIngredientAdapter, mDirectionAdapter;
     private RecyclerView.LayoutManager mIngredientLayoutManager, mDirectionLayoutManager;
 
-    private String mTitle;
     private int mId;
-    private String mImageTransitionName;
-    private List<IngredientUsage> mIngredientUsageList;
+    private String mRecipeName, mImageTransitionName;
 
     // textViews for no existing data
     private TextView mNoIngredientTextView, mNoDirectionTextView;
@@ -70,12 +69,12 @@ public class DetailActivity extends AppCompatActivity{
 
 
         mImageTransitionName = getIntent().getStringExtra(MainActivity.EXTRA_RECIPE_IMAGE_TRANSITION_NAME);
-
         mId = getIntent().getIntExtra(MainActivity.EXTRA_RECIPE_ID, -1);
+
         if (mId == -1) {
             Log.e("DetailActivity", "Error! The recipe is not found");
         } else {
-            // do nothing
+            Log.v("DetailActivity", "Successful!");
         }
 
 
@@ -102,6 +101,11 @@ public class DetailActivity extends AppCompatActivity{
         showRecipeDetail();
     }
 
+
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_catalog.xml file.
@@ -113,6 +117,10 @@ public class DetailActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_share:
+                shareRecipe();
+                return true;
+
             case R.id.action_edit:
                 // action edit does three things:
                 // 1. Edit the overall information
@@ -127,7 +135,7 @@ public class DetailActivity extends AppCompatActivity{
                 // insert a ingredient and a direction
                 CookiaryDbHelper db = new CookiaryDbHelper(this);
                 db.updateRecipeOverall(mId,
-                        getResources().getString(R.string.dummy_recipe_name),
+                        mRecipeName,
                         getResources().getString(R.string.dummy_cooking_time),
                         Integer.parseInt(getResources().getString(R.string.dummy_yield)),
                         getResources().getString(R.string.dummy_difficulty));
@@ -143,8 +151,11 @@ public class DetailActivity extends AppCompatActivity{
             case R.id.action_delete_recipe:
                 deleteRecipe();
 
+                // return to the main activity when the recipe is deleted
                 Intent intentDeleteSuccessful = new Intent(DetailActivity.this, MainActivity.class);
+                intentDeleteSuccessful.putExtra("Delete Recipe Prompt", "The recipe is deleted successfully!");
                 startActivity(intentDeleteSuccessful);
+                finish();
                 return true;
 
         }
@@ -155,11 +166,12 @@ public class DetailActivity extends AppCompatActivity{
         // get the overall information of the recipe
         Recipe myRecipe;
         CookiaryDbHelper db = new CookiaryDbHelper(this);
+
         myRecipe = db.getRecipe(mId);
 
         String servingsString = myRecipe.getYield()+ " Servings";
 
-
+        mRecipeName = myRecipe.getName();
         mCollapsingToolbarLayout.setTitle(myRecipe.getName());
         mCookingTimeTextView.setText(myRecipe.getCookingTime());
         mServingsTextView.setText(servingsString);
@@ -211,5 +223,13 @@ public class DetailActivity extends AppCompatActivity{
         CookiaryDbHelper db = new CookiaryDbHelper(this);
         db.deleteRecipe(mId);
 
+    }
+
+    private void shareRecipe(){
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("*/*");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Recipe id: " + mId);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "This is the recipe: " + mRecipeName);
+        startActivity(Intent.createChooser(shareIntent, "Share"));
     }
 }

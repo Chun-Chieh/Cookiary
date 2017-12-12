@@ -21,8 +21,11 @@ allprojects {
         jcenter()
         maven {
             url 'https://maven.google.com/'
+
             name 'Google'
         }
+        // like button animation
+        maven { url "https://jitpack.io" }
     }
 }
 

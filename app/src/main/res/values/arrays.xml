@@ -2,22 +2,21 @@
 <resources>
     <!-- Array for the autocompletion of dish_categories (CreateNewRecipe) -->
     <string-array name="dish_category">
-        <item>Appetizer</item>
-        <item>Beverage</item>
-        <item>Breakfast</item>
-        <item>Dessert</item>
-        <item>Main Dish</item>
-        <item>Salad</item>
-        <item>Snack</item>
-        <item>Soup</item>
+        <item>@string/category_beverage</item>
+        <item>@string/category_breakfast</item>
+        <item>@string/category_dessert</item>
+        <item>@string/category_maindish</item>
+        <item>@string/category_salad</item>
+        <item>@string/category_snack</item>
+        <item>@string/category_soup</item>
     </string-array>
 
     <string-array name="measurement">
-        <item>teaspoon</item>
-        <item>tablespoon</item>
-        <item>cup</item>
-        <item>oz</item>
-        <item>unit</item>
+        <item>@string/measurement_tspn</item>
+        <item>@string/measurement_tbspn</item>
+        <item>@string/measurement_cup</item>
+        <item>@string/measurement_oz</item>
+        <item>@string/measurement_unit</item>
     </string-array>
 
 </resources>

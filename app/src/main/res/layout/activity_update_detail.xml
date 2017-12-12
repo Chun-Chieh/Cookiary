@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="center"
-                        android:text="servings" />
+                        android:text="@string/servings" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -217,7 +217,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="add ingredients"
+                    android:text="@string/add_ingredients"
                     android:textAlignment="viewStart"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -260,7 +260,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="add directions"
+                    android:text="@string/add_directions"
                     android:textAlignment="viewStart"
                     android:textSize="12sp" />
             </LinearLayout>

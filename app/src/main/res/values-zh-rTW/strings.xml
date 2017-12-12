@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cookiary</string>
+    <string name="detail_activity_title_recipe_detail">食譜資訊</string>
+    <string name="update_activity_title">編輯食譜</string>
+    <string name="create_new_recipe_activity_title">新增食譜</string>
+    <string name="no_data_history">該煮飯囉！</string>
+    <string name="action_edit_detail">編輯</string>
+    <string name="action_delete_recipe">刪除食譜</string>
+    <string name="action_share_recipe">分享食譜</string>
+    <string name="action_search">搜尋</string>
+    <string name="action_save">儲存</string>
+    <string name="category_overview">概要</string>
+    <string name="category_ingredients">食材</string>
+    <string name="category_directions">步驟</string>
+    <string name="create">建立</string>
+    <string name="search_hint">輸入名稱或類型</string>
+    <string name="delete">刪除</string>
+    <string name="direction">步驟</string>
+    <string name="ingredient">食材</string>
+    <string name="difficulty">難易度</string>
+    <string name="yield">份量</string>
+    <string name="time">烹煮時間</string>
+    <string name="category">類型</string>
+    <string name="description">描述</string>
+    <string name="name">名稱</string>
+    <string name="name_required">名稱</string>
+    <string name="no_direction_text_view">沒有資料！</string>
+    <string name="no_ingredient_text_view">沒有資料！</string>
+    <string name="direction_title_step">" "</string>
+    <string name="category_beverage">飲料</string>
+    <string name="category_breakfast">早餐</string>
+    <string name="category_dessert">點心</string>
+    <string name="category_maindish">主餐</string>
+    <string name="category_salad">沙拉</string>
+    <string name="category_snack">零食</string>
+    <string name="category_soup">湯</string>
+    <string name="measurement_tspn">茶匙</string>
+    <string name="measurement_tbspn">湯匙</string>
+    <string name="measurement_cup">杯</string>
+    <string name="measurement_oz">盎司</string>
+    <string name="measurement_unit">單位</string>
+    <string name="servings">人份</string>
+    <string name="add_ingredients">新增食材</string>
+    <string name="add_directions">新增步驟</string>
+</resources>
