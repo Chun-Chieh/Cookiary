@@ -369,11 +369,11 @@ public class CookiaryDbHelper extends SQLiteOpenHelper {
     /**
      * Add the ingredients for a recipe
      *
-     * @param recipe_id
-     * @param ingredient_id
-     * @param quantity
-     * @param measurement
-     * @return
+     * @param recipe_id the recipe id
+     * @param ingredient_id the ingredient id
+     * @param quantity quantity of measurement
+     * @param measurement measurement name
+     * @return row
      */
     public long addRecipeIngredients(int recipe_id, long ingredient_id, int quantity, String measurement) {
         SQLiteDatabase db = this.getWritableDatabase();

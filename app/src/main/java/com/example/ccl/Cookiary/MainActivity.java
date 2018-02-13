@@ -226,11 +226,11 @@ public class MainActivity extends AppCompatActivity implements RecipeItemClickLi
         View statusBar = findViewById(android.R.id.statusBarBackground);
         View navigationBar = findViewById(android.R.id.navigationBarBackground);
 
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                this
-                , Pair.create((View)shareImageView, shareImageView.getTransitionName())
-                , Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME)
-                , Pair.create(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME));
+//        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+//                this
+//                , Pair.create((View)shareImageView, shareImageView.getTransitionName())
+//                , Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME)
+//                , Pair.create(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME));
 
 
 //        startActivity(recipeDetail, options.toBundle());

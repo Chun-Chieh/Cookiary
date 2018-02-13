@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ccl.Cookiary.R;
@@ -49,6 +50,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         ImageView mDishPhoto;
         ImageView mExpand;
 
+        // test
+        RelativeLayout mTest;
+
 
         RecipeViewHolder(View itemView) {
             super(itemView);
@@ -59,6 +63,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             mCategory = itemView.findViewById(R.id.dish_category_text_view);
             mDishPhoto = itemView.findViewById(R.id.thumb_nail);
             mExpand = itemView.findViewById(R.id.expand_image_view);
+            mTest = itemView.findViewById(R.id.test_expend);
         }
     }
 
@@ -98,11 +103,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             @Override
             public boolean onLongClick(View v) {
                 if (!hasDescShown) {
-                    holder.mDescription.setVisibility(View.VISIBLE);
+                    holder.mTest.setVisibility(View.VISIBLE);
                     hasDescShown = true;
                 }
                 else {
-                    holder.mDescription.setVisibility(View.GONE);
+                    holder.mTest.setVisibility(View.GONE);
                     hasDescShown = false;
                 }
                 return true;
