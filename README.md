@@ -15,7 +15,7 @@ Cookiary is a personal cookbook for users who love cooking. For more [detail](ht
  </br>
  
 ## Screenshots
-<p float="center">
+<p float="center" align="center">
   <img src="/screenshot/Main_Menu.jpg" width="280" />
   <img src="/screenshot/Recipe_Detail.jpg" width="280" /> 
   <img src="/screenshot/Recipe_Detail_Edit.jpg" width="280" />
