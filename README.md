@@ -15,23 +15,11 @@ Cookiary is a personal cookbook for users who love cooking. For more [detail](ht
  </br>
  
 ## Screenshots
-* Main menu </br>
-
-![Main menu](screenshot/Main_Menu.jpg)
-</br> 
-</br> 
-
-* Recipe detail </br>
-
-![Recipe detail](screenshot/Recipe_Detail.jpg)
-</br>
-</br>
-
-* Edit recipe </br>
-
-![Edit recipe detail](./screenshot/Recipe_Detail_Edit.jpg)
-</br>
-</br>
+<p float="center">
+  <img src="/screenshot/Main_Menu.jpg" width="280" />
+  <img src="/screenshot/Recipe_Detail.jpg" width="280" /> 
+  <img src="/screenshot/Recipe_Detail_Edit.jpg" width="280" />
+</p>
 
 ## Future
 1. Server side implementation: 
