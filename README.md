@@ -17,15 +17,20 @@ Cookiary is a personal cookbook for users who love cooking. For more [detail](ht
  </br>
  
 ## Screenshots
-* Main menu
+* Main menu </br>
+
 ![Main menu](screenshot/Main_Menu.png)
 </br> 
-</br>     
-* Recipe detail 
+</br> 
+
+* Recipe detail </br>
+
 ![Recipe detail](screenshot/Recipe_Detail.png)
 </br>
 </br>
-* Edit recipe    
+
+* Edit recipe </br>
+
 ![Edit recipe detail](./screenshot/Recipe_Detail_Edit.png)
 </br>
 </br>
