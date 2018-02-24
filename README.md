@@ -1,0 +1,4 @@
+# Cookiary
+	Cookiary is an app which allows user to keep a diary of the cooking activities. By using the app, the users can keep notes, feelings and opinions of the homemade culinary dish including the name of the recipe, description, yield (i.e., number of servings), ingredients and measurement, preparation time, calories and directions on the device (SQLite). Eventually, the app will become a personal cookbook for users who love cooking.
+  
+	In the future, the goal of Project: Cookiary could allow the users to share or search for recipes. For instance, a user can share their recipes and photos to gain their reputation. On the other hand, a user can search for recipes by username or ingredients. In this way, users can connect with each other by sharing the same interests in cooking. Ultimately, the app isn’t a recipe keeper, but becomes a social app for cooking lovers.
