@@ -19,19 +19,19 @@ Cookiary is a personal cookbook for users who love cooking. For more [detail](ht
 ## Screenshots
 * Main menu </br>
 
-![Main menu](screenshot/Main_Menu.png)
+![Main menu](screenshot/Main_Menu.jpg)
 </br> 
 </br> 
 
 * Recipe detail </br>
 
-![Recipe detail](screenshot/Recipe_Detail.png)
+![Recipe detail](screenshot/Recipe_Detail.jpg)
 </br>
 </br>
 
 * Edit recipe </br>
 
-![Edit recipe detail](./screenshot/Recipe_Detail_Edit.png)
+![Edit recipe detail](./screenshot/Recipe_Detail_Edit.jpg)
 </br>
 </br>
 
