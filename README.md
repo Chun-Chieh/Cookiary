@@ -1,9 +1,8 @@
 Cookiary
 ==============================================================================
 Cookiary is a personal cookbook for users who love cooking. For more detail: 
-＜/br＞
-＜/br＞
-＜/br＞
+
+
 
 ## Main Features
  1. Display recipes and details with user-friendly UI.
@@ -14,28 +13,27 @@ Cookiary is a personal cookbook for users who love cooking. For more detail:
  6. Delete recipes
  7. Share the recipes
  8. Support English and Chinese(Simplified & Traditional)
-＜/br＞
-＜/br＞
-＜/br＞
-
+  
+  
+  
 ## Screenshots
 ![Main menu](screenshot/Main_Menu.png)
-＜/br＞
+  
+  
 ![Recipe detail](screenshot/Recipe_Detail.png)
-＜/br＞
+  
+  
 ![Edit recipe detail](./screenshot/Recipe_Detail_Edit.png)
-＜/br＞
-＜/br＞
-＜/br＞
+
+
 
 ## Future
 1. Server side implementation: 
 * The user can view the recipe via web browsers.
 * News feed
 2. UI improvement
-＜/br＞
-＜/br＞
-＜/br＞
+
+
 
 ## License
     Copyright 2018, Chun-Chieh Liang
@@ -52,5 +50,5 @@ Cookiary is a personal cookbook for users who love cooking. For more detail:
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and 
     limitations under the License.
-
- 
+    
+    
